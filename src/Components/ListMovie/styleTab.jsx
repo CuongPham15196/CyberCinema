@@ -9,9 +9,7 @@ export const StyledTab = withStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(18),
     transition: "all 0.5s",
-    "&:focus": {
-      opacity: 1,
-    },
+
     "&:hover": {
       transform: "scale(1.5)",
     },

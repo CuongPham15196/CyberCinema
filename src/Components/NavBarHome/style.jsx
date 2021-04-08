@@ -23,12 +23,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1.4,
-    textDecoration: "none",
+    textDecoration: "none!important",
     margin: theme.spacing(1.5),
-    color: "#f1684e",
+    color: theme.palette.secondary.main,
+    transition: "all 0.5s",
     "&:hover": {
       color: "white",
-      textDecoration: "none",
     },
   },
   hide: {
@@ -39,7 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
   drawerPaper: {
-    backgroundColor: "rgba(33, 33, 33)",
+    backgroundColor: "black!important",
     width: drawerWidth,
   },
   drawerHeader: {
@@ -69,22 +69,35 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   logo: {
-    witdh: 50,
+    width: 50,
     height: 50,
   },
   navLink: {
     margin: "0 0.1rem",
     fontSize: "0.9rem!important",
     color: "#f1684e!important",
+    transition: "all 0.5s",
     "&:hover": {
+      transform: "scale(1.1)",
       color: "white!important",
     },
   },
   navLinkBtn: {
     fontSize: "0.7rem!important",
     color: "#ff997b!important",
+    transition: "all 0.5s",
     "&:hover": {
+      transform: "scale(1.1)",
       color: "white!important",
+    },
+  },
+  user: {
+    paddingLeft: 0,
+    fontSize: "0.6rem!important",
+    transition: "all 0.5s",
+    "&:hover": {
+      color: "white",
+      transform: "scale(1.1)",
     },
   },
 }));

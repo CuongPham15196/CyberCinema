@@ -7,9 +7,16 @@ const initialState = {
   err: null,
 };
 
-export const listMovieApi = createAsyncThunk("listMovie/listMovieApi", async () => {
-  return await movieService.listMovieApi();
-});
+export const listMovieApi = createAsyncThunk(
+  "listMovie/listMovieApi",
+  async (params, { rejectWithValue }) => {
+    try {
+      return await movieService.listMovieApi();
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 const listMovie = createSlice({
   name: "listMovie",
@@ -18,8 +25,6 @@ const listMovie = createSlice({
   extraReducers: {
     [listMovieApi.pending]: (state) => {
       state.loading = true;
-      state.data = null;
-      state.err = null;
     },
     [listMovieApi.fulfilled]: (state, action) => {
       state.loading = false;

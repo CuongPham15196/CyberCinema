@@ -22,14 +22,8 @@ function ListMovie() {
   };
 
   return (
-    <Container className={classes.root}>
-      <StyledTabs
-        value={value}
-        onChange={handleChange}
-        centered
-        indicatorColor="secondary"
-        textColor="secondary"
-      >
+    <Container id="lichChieu" maxWidth="xl" className={classes.root}>
+      <StyledTabs value={value} onChange={handleChange} centered textColor="secondary">
         <StyledTab label="Đang chiếu" {...a11yProps(0)} />
         <StyledTab label="Sắp chiếu" {...a11yProps(1)} />
       </StyledTabs>

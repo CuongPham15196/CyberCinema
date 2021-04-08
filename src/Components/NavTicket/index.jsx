@@ -1,11 +1,10 @@
 import { Button, FormControl, NativeSelect } from "@material-ui/core";
 import { useStyles } from "Components/NavTicket/style";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showTimesMovieApi } from "Reducer/showTimesMoive";
-
 import "./style.css";
+import { showTimesMovieApi } from "Reducer/showTimesMoive";
 
 function NavTicket(props) {
   const listMovie = useSelector((state) => state.listMovie.data);

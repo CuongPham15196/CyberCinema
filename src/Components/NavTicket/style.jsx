@@ -13,5 +13,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   btn: {
     marginTop: theme.spacing(1.6),
+    transition: "all 0.5s",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+      transform: "scale(1.1)",
+    },
   },
 }));

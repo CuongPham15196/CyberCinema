@@ -1,6 +1,6 @@
 const { withStyles, Tabs } = require("@material-ui/core");
 
-export const StyledTabs = withStyles({
+export const StyledTabs = withStyles((theme) => ({
   indicator: {
     display: "flex",
     justifyContent: "center",
@@ -8,7 +8,7 @@ export const StyledTabs = withStyles({
     "& > span": {
       maxWidth: 100,
       width: "100%",
-      backgroundColor: "#f1684e",
+      backgroundColor: theme.palette.secondary.main,
     },
   },
-})((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
+}))((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);

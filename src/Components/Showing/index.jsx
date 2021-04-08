@@ -32,14 +32,14 @@ export default function Showing() {
         cols={4}
         rows={2}
         gap={20}
-        loop="true"
+        loop={true}
         responsiveLayout={[
           {
             breakpoint: 1200,
             cols: 3,
           },
           {
-            breakpoint: 990,
+            breakpoint: 992,
             cols: 2,
           },
         ]}

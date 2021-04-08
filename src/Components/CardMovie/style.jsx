@@ -25,8 +25,15 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     transition: "all 0.5s",
     "&:hover": {
-      color: "#f1684e",
+      color: theme.palette.secondary.main,
       borderColor: "#f1684e",
+    },
+  },
+  btn: {
+    transition: "all 0.5s",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+      transform: "scale(1.05)",
     },
   },
 }));

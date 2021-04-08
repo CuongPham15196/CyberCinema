@@ -9,6 +9,7 @@ import { useStyles } from "./style";
 import { Box, Fade } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import { NavLink } from "react-router-dom";
 
 export default function CardMovie(props) {
   const classes = useStyles();
@@ -26,11 +27,17 @@ export default function CardMovie(props) {
         onMouseEnter={handleChange}
         onMouseLeave={handleChange}
       >
-        <CardMedia className={classes.media} image={movie.hinhAnh} title="Contemplative Reptile" />
+        <NavLink to={`/phim/${movie.maPhim}/${movie.tenPhim}`}>
+          <CardMedia
+            className={classes.media}
+            image={movie.hinhAnh}
+            title="Contemplative Reptile"
+          />
+        </NavLink>
         <Fade in={checked}>
-          <button className={classes.play} onClick={() => setData(movie.trailer, true)}>
+          <div className={classes.play} onClick={() => setData(movie.trailer, true)}>
             <PlayArrowIcon fontSize="large" />
-          </button>
+          </div>
         </Fade>
       </CardActionArea>
 
@@ -47,9 +54,19 @@ export default function CardMovie(props) {
         </Box>
       </CardContent>
       <CardActions style={{ textAlign: "center" }}>
-        <Button variant="contained" color="secondary" style={{ width: "100%" }}>
-          Mua vé
-        </Button>
+        <NavLink
+          to={`/phim/${movie.maPhim}/${movie.tenPhim}`}
+          style={{ width: "100%", textDecoration: "none" }}
+        >
+          <Button
+            variant="contained"
+            className={classes.btn}
+            color="secondary"
+            style={{ width: "100%" }}
+          >
+            Mua vé
+          </Button>
+        </NavLink>
       </CardActions>
     </Card>
   );

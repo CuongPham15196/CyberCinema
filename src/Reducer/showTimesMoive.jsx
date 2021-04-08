@@ -9,8 +9,12 @@ const initialState = {
 
 export const showTimesMovieApi = createAsyncThunk(
   "showTimesMovie/showTimesMovieApi",
-  async (id) => {
-    return await movieService.showTimesMovieApi(id);
+  async (id, { rejectWithValue }) => {
+    try {
+      return await movieService.showTimesMovieApi(id);
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
   }
 );
 
@@ -21,8 +25,6 @@ const showTimesMoive = createSlice({
   extraReducers: {
     [showTimesMovieApi.pending]: (state) => {
       state.loading = true;
-      state.data = null;
-      state.err = null;
     },
     [showTimesMovieApi.fulfilled]: (state, action) => {
       state.loading = false;
