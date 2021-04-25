@@ -11,6 +11,10 @@ export const theme = createMuiTheme({
     },
   },
   palette: {
+    action: {
+      disabledBackground: "white",
+      disabled: "gray",
+    },
     primary: {
       light: "#484848",
       main: "#212121",

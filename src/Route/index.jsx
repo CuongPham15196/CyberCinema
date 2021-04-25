@@ -4,6 +4,8 @@ import DetailCinema from "Pages/HomeTemplate/DetailCinema";
 import HomePage from "Pages/HomeTemplate/HomePage";
 import Login from "Pages/HomeTemplate/Login";
 import CinemaMobile from "Pages/HomeTemplate/CinemaMobile";
+import TicketOffice from "Pages/HomeTemplate/TicketOffice";
+import DashBoard from "Pages/AdminTemplate/DashBoard";
 
 const routerHome = [
   {
@@ -36,8 +38,19 @@ const routerHome = [
     component: DetailCinema,
     exact: false,
   },
+  {
+    path: "/dat-ve/:maLichChieu/:biDanh",
+    component: TicketOffice,
+    exact: false,
+  },
 ];
 
-const routerAdmin = [];
+const routerAdmin = [
+  {
+    path: "/dash-board",
+    component: DashBoard,
+    exact: false,
+  },
+];
 
 export { routerHome, routerAdmin };

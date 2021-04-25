@@ -144,7 +144,10 @@ function Movie(props) {
               if (date === new Date(time.ngayChieuGioChieu).toLocaleDateString())
                 return (
                   <Grid key={time.maLichChieu} item xs={12} md={6} lg={4}>
-                    <NavLink to="/" style={{ textDecoration: "none" }}>
+                    <NavLink
+                      to={`/dat-ve/${time.maLichChieu}/${showTimesMovie?.biDanh}`}
+                      style={{ textDecoration: "none" }}
+                    >
                       <Button
                         variant="contained"
                         color="secondary"

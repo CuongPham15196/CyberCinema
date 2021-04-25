@@ -91,6 +91,18 @@ export const useStyles = makeStyles((theme) => ({
       color: "white!important",
     },
   },
+  treeView: {
+    transform: "translate(-20%,-30%)",
+    height: 50,
+    color: "#f1684e!important",
+    transition: "all 0.5s",
+    "&:hover": {
+      color: "white!important",
+    },
+    [theme.breakpoints.down("xs")]: {
+      transform: "translate(-15%,-30%)",
+    },
+  },
   user: {
     paddingLeft: 0,
     fontSize: "0.6rem!important",

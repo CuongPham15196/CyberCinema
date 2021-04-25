@@ -6,6 +6,10 @@ import listMovieShowTimeByCinema from "./listMovieShowTimeByCinema";
 import listInformationCinema from "./listInformationCinema";
 import userLogin from "./userLogin";
 import userSignUp from "./userSignUp";
+import ticketOfficeByMovie from "./ticketOfficeByMovie";
+import buyTicket from "./buyTicket";
+import buyFood from "./buyFood";
+import adminLogin from "./adminLogin";
 
 const rootReducer = combineReducers({
   listMovie,
@@ -15,6 +19,10 @@ const rootReducer = combineReducers({
   listInformationCinema,
   userLogin,
   userSignUp,
+  ticketOfficeByMovie,
+  buyTicket,
+  buyFood,
+  adminLogin,
 });
 
 export default rootReducer;

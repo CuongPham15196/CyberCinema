@@ -17,8 +17,6 @@ import {
   Divider,
   IconButton,
   Container,
-  MenuList,
-  MenuItem,
 } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +24,7 @@ import { userLogOut } from "Reducer/userLogin";
 import { StyledMenu } from "./styledMenu";
 import { StyledMenuItem } from "./styledMenuItem";
 import { useHistory } from "react-router";
+import { TreeItem, TreeView } from "@material-ui/lab";
 
 export default function PersistentDrawerRight(props) {
   const classes = useStyles();
@@ -168,21 +167,29 @@ export default function PersistentDrawerRight(props) {
         </NavLink>
         <Divider light={true} style={{ height: 20 }} />
         {JSON.parse(localStorage.getItem("User")) || user ? (
-          <Container style={{ margin: 0, paddingLeft: 5 }}>
-            <Typography style={{ color: "#f1684e" }}>
-              {JSON.parse(localStorage.getItem("User"))
-                ? JSON.parse(localStorage.getItem("User")).hoTen
-                : user.hoTen}
-            </Typography>
-            <MenuList style={{ color: "#f1684e" }}>
-              <MenuItem
-                className={classes.userItem}
-                style={{ fontSize: "0.8rem", fontWeight: "bold" }}
-                onClick={() => logOut()}
-              >
-                Đăng xuất
-              </MenuItem>
-            </MenuList>
+          <Container maxWidth="xl">
+            <TreeView multiSelect className={classes.treeView}>
+              <TreeItem nodeId="1" label="Tài khoản">
+                <TreeItem
+                  style={{ marginTop: 5 }}
+                  nodeId="2"
+                  label={
+                    JSON.parse(localStorage.getItem("User"))
+                      ? JSON.parse(localStorage.getItem("User")).hoTen
+                      : user.hoTen
+                  }
+                  className={classes.navLinkBtn}
+                >
+                  <TreeItem
+                    style={{ marginTop: 5 }}
+                    nodeId="3"
+                    label="Đăng xuất"
+                    className={classes.navLinkBtn}
+                    onClick={() => logOut()}
+                  />
+                </TreeItem>
+              </TreeItem>
+            </TreeView>
           </Container>
         ) : (
           <NavLink to="/dang-nhap" style={{ textDecoration: "none" }}>

@@ -27,7 +27,7 @@ export default function CardMovie(props) {
         onMouseEnter={handleChange}
         onMouseLeave={handleChange}
       >
-        <NavLink to={`/phim/${movie.maPhim}/${movie.tenPhim}`}>
+        <NavLink to={`/phim/${movie.maPhim}/${movie.biDanh}`}>
           <CardMedia
             className={classes.media}
             image={movie.hinhAnh}

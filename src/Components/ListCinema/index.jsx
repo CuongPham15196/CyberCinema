@@ -152,9 +152,14 @@ export default function ListCinema(props) {
                   if (date === new Date(time.ngayChieuGioChieu).toLocaleDateString())
                     return (
                       <Grid key={time.maLichChieu} item xs={6}>
-                        <Button className={classes.btn} color="secondary" variant="contained">
-                          {new Date(time.ngayChieuGioChieu).toLocaleTimeString()}
-                        </Button>
+                        <NavLink
+                          to={`/dat-ve/${time.maLichChieu}/${movie.tenPhim}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <Button className={classes.btn} color="secondary" variant="contained">
+                            {new Date(time.ngayChieuGioChieu).toLocaleTimeString()}
+                          </Button>
+                        </NavLink>
                       </Grid>
                     );
                 });
@@ -185,11 +190,9 @@ export default function ListCinema(props) {
                           <Typography className={classes.headingMovie}>{dataDate}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                          <NavLink to="/" style={{ textDecoration: "none" }}>
-                            <Grid container spacing={2}>
-                              {renderShowTimeMovie(maPhim, dataDate)}
-                            </Grid>
-                          </NavLink>
+                          <Grid container spacing={2}>
+                            {renderShowTimeMovie(maPhim, dataDate)}
+                          </Grid>
                         </AccordionDetails>
                       </Accordion>
                     );

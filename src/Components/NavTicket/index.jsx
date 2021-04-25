@@ -1,30 +1,48 @@
 import { Button, FormControl, NativeSelect } from "@material-ui/core";
 import { useStyles } from "Components/NavTicket/style";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
 import { showTimesMovieApi } from "Reducer/showTimesMoive";
+import { NavLink } from "react-router-dom";
 
 function NavTicket(props) {
   const listMovie = useSelector((state) => state.listMovie.data);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const showTimesMovie = useSelector((state) => state.showTimesMovie.data);
+  const [maLichChieu, setMaLichChieu] = useState();
+  const [nameMovie, setNameMovie] = useState();
 
   const formik = useFormik({
     initialValues: {
       movie: "",
       cinema: "",
       date: "",
-      screening: "",
+      time: "",
     },
   });
 
   useEffect(() => {
-    if (formik.values.movie) dispatch(showTimesMovieApi(formik.values.movie));
+    dispatch(showTimesMovieApi(formik.values.movie));
   }, [formik.values.movie]);
 
-  const showTimesMovie = useSelector((state) => state.showTimesMovie.data);
+  useEffect(() => {
+    setNameMovie(showTimesMovie?.biDanh);
+    return showTimesMovie?.heThongRapChieu.map((cinema) => {
+      return cinema.cumRapChieu.map((theater) => {
+        if (theater.maCumRap === formik.values.cinema)
+          return theater.lichChieuPhim.map((movie) => {
+            if (
+              formik.values.date === new Date(movie.ngayChieuGioChieu).toLocaleDateString() &&
+              formik.values.time === new Date(movie.ngayChieuGioChieu).toLocaleTimeString()
+            )
+              setMaLichChieu(movie.maLichChieu);
+          });
+      });
+    });
+  }, [formik.values.cinema, formik.values.date, formik.values.time]);
 
   const renderMovie = () => {
     return listMovie?.map((movie) => {
@@ -138,11 +156,11 @@ function NavTicket(props) {
           </FormControl>
           <FormControl className={classes.formControl}>
             <NativeSelect
-              value={formik.values.screening}
+              value={formik.values.time}
               onChange={formik.handleChange}
-              name="screening"
+              name="time"
               className={classes.selectEmpty}
-              inputProps={{ "aria-label": "screening" }}
+              inputProps={{ "aria-label": "time" }}
             >
               <option value="">Suất chiếu</option>
               {formik.values.movie !== "" &&
@@ -154,9 +172,24 @@ function NavTicket(props) {
               )}
             </NativeSelect>
           </FormControl>
-          <Button className={classes.btn} type="submit" variant="contained" color="primary">
-            Đặt vé
-          </Button>
+          <NavLink to={`/dat-ve/${maLichChieu}/${nameMovie}`} style={{ textDecoration: "none" }}>
+            <Button
+              className={classes.btn}
+              type="submit"
+              disabled={
+                !(
+                  formik.values.movie &&
+                  formik.values.cinema &&
+                  formik.values.date &&
+                  formik.values.time
+                )
+              }
+              variant="contained"
+              color="primary"
+            >
+              Đặt vé
+            </Button>
+          </NavLink>
         </form>
       </div>
     </section>
