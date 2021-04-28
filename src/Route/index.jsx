@@ -6,6 +6,8 @@ import Login from "Pages/HomeTemplate/Login";
 import CinemaMobile from "Pages/HomeTemplate/CinemaMobile";
 import TicketOffice from "Pages/HomeTemplate/TicketOffice";
 import DashBoard from "Pages/AdminTemplate/DashBoard";
+import UserManager from "Pages/AdminTemplate/UserManager";
+import UpdateUser from "Pages/AdminTemplate/UserManager/UserUpdate";
 
 const routerHome = [
   {
@@ -21,7 +23,7 @@ const routerHome = [
   {
     path: "/dang-ky",
     component: SignUp,
-    exact: false,
+    exact:false,
   },
   {
     path: "/cum-rap",
@@ -49,8 +51,19 @@ const routerAdmin = [
   {
     path: "/dash-board",
     component: DashBoard,
-    exact: false,
+    exact: true,
   },
+  {
+    path:"/dash-board/user-manager",
+    component:UserManager,
+    exact:false,
+  },
+  {
+    path:"/edit-user/:taiKhoan",
+    component:UpdateUser,
+    exact:false,
+  }
+  
 ];
 
 export { routerHome, routerAdmin };

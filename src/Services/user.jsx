@@ -17,7 +17,40 @@ export default class UserService {
       data: user,
     });
   }
-
+  
+  getUserApi(){
+    return Axios({
+      url:"https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP10",
+      method:"GET",
+    })
+  }
+  deleteUserApi(user){
+    let accessToken = "";
+    if (localStorage.getItem("UserAdmin")) {
+      accessToken = JSON.parse(localStorage.getItem("UserAdmin")).accessToken;
+    }
+    return Axios({
+      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`,
+      method:"DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+  }
+  updateUserApi(user){
+    let accessToken = "";
+    if (localStorage.getItem("UserAdmin")) {
+      accessToken = JSON.parse(localStorage.getItem("UserAdmin")).accessToken;
+    }
+    return Axios({
+      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+      method:"PUT",
+      data:user,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+  }
   userValidationLogin = Yup.object({
     taiKhoan: Yup.string()
       .min(4, "Không được nhập ít hơn 4 ký tự")

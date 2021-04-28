@@ -10,6 +10,9 @@ import ticketOfficeByMovie from "./ticketOfficeByMovie";
 import buyTicket from "./buyTicket";
 import buyFood from "./buyFood";
 import adminLogin from "./adminLogin";
+import listUser from "./listUser"
+import deleteUser from "./deleteUser"
+import updateUser from "./updateUser"
 
 const rootReducer = combineReducers({
   listMovie,
@@ -23,6 +26,9 @@ const rootReducer = combineReducers({
   buyTicket,
   buyFood,
   adminLogin,
+  listUser,
+  deleteUser,
+  updateUser,
 });
 
 export default rootReducer;

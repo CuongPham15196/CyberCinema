@@ -34,9 +34,12 @@ function Auth() {
   });
 
   useEffect(() => {
-    if (adminLogin) history.push("/dash-board");
+    if (adminLogin) {
+      localStorage.setItem("UserAdmin", JSON.stringify(adminLogin));
+      history.push("/dash-board");
+    }
   }, [adminLogin]);
-
+ 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
