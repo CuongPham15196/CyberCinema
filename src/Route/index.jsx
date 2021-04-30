@@ -6,8 +6,12 @@ import Login from "Pages/HomeTemplate/Login";
 import CinemaMobile from "Pages/HomeTemplate/CinemaMobile";
 import TicketOffice from "Pages/HomeTemplate/TicketOffice";
 import DashBoard from "Pages/AdminTemplate/DashBoard";
-import UserManager from "Pages/AdminTemplate/UserManager";
-import UpdateUser from "Pages/AdminTemplate/UserManager/UserUpdate";
+import AddUser from "Pages/AdminTemplate/AddUser";
+import ListUser from "Pages/AdminTemplate/ListUser";
+import AddMovie from "Pages/AdminTemplate/AddMovie";
+import AddTicket from "Pages/AdminTemplate/AddTicket";
+import ListMoviePage from "Pages/AdminTemplate/ListMovie";
+
 
 const routerHome = [
   {
@@ -51,18 +55,34 @@ const routerAdmin = [
   {
     path: "/dash-board",
     component: DashBoard,
-    exact: true,
+    exact: false,
   },
   {
-    path:"/dash-board/user-manager",
-    component:UserManager,
-    exact:false,
+    path: "/add-user",
+    component: AddUser,
+    exact: false,
   },
   {
-    path:"/edit-user/:taiKhoan",
-    component:UpdateUser,
-    exact:false,
-  }
+    path: "/list-user",
+    component: ListUser,
+    exact: false,
+  },
+  {
+    path: "/add-movie",
+    component: AddMovie,
+    exact: false,
+  },
+
+  {
+    path: "/add-ticket",
+    component: AddTicket,
+    exact: false,
+  },
+  {
+    path: "/list-movie",
+    component: ListMoviePage,
+    exact: false,
+  },
   
 ];
 

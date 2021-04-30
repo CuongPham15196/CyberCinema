@@ -23,7 +23,13 @@ export const adminLoginApi = createAsyncThunk(
 const adminLogin = createSlice({
   name: "adminLogin",
   initialState,
-  reducers: {},
+  reducers: {
+    adminLogOut(state, action) {
+      state.data = null;
+      state.err = null;
+      localStorage.clear("UserAdmin");
+    },
+  },
   extraReducers: {
     [adminLoginApi.pending]: (state, action) => {
       state.loading = true;
@@ -41,5 +47,5 @@ const adminLogin = createSlice({
   },
 });
 
-export const {} = adminLogin.actions;
+export const {adminLogOut} = adminLogin.actions;
 export default adminLogin.reducer;

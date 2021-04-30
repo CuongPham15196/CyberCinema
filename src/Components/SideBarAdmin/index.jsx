@@ -2,21 +2,25 @@ import React, { useState,useEffect } from "react";
 import {Drawer,CssBaseline,List,Divider,ListItem,ListItemIcon,ListItemText,Collapse,Avatar} from "@material-ui/core";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 import AppsIcon from '@material-ui/icons/Apps';
 import EditIcon from '@material-ui/icons/Edit';
-import SettingsIcon from '@material-ui/icons/Settings';
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import useStyles from "./style"
-import Managerment from "Pages/AdminTemplate/UserManager";
+import {adminLogOut} from 'Reducer/adminLogin'
+import {useDispatch} from 'react-redux'
+import { useHistory } from "react-router";
+
 
 
 
 export default function SideMenuComp() {
   const classes = useStyles();
+  const history = useHistory()
+  const dispatch = useDispatch();
   const [isUser, setOpenUser] = useState(false);
   const [user,setUser]=useState(null)
+  
   const handleSetUser = () =>{
      if(JSON.parse(localStorage.getItem("UserAdmin"))){
          setUser(JSON.parse(localStorage.getItem("UserAdmin")).hoTen);
@@ -26,13 +30,26 @@ export default function SideMenuComp() {
          setOpenUser(false)
      }
   }
+  const adminOut =  ()=>{
+      dispatch(adminLogOut())
+     history.push("/dash-board")
+  }
   const handleIsUserMenu = () => {
     setOpenUser((prevOpen) => !prevOpen);
   };
-  const [ManagerUser,setQLND] = useState(true);
+  const [ManagerUser,setQLND] = useState(false);
+  const [QLFilm,setQLPhim] = useState(false);
+  const [QLVe,setQLVe] = useState(false);
   const handleQLNDMenu = () =>{
       setQLND(!ManagerUser)
   }
+  const handleQLPhim = ()=>{
+    setQLPhim(!QLFilm)
+  }
+  const handleQLVe = ()=>{
+    setQLVe(!QLVe)
+  }
+ 
   useEffect(() => {
     handleSetUser()
       return () => {
@@ -75,13 +92,9 @@ export default function SideMenuComp() {
                     <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
                     <ListItemText primary={"Role: Admin"}></ListItemText>
                 </ListItem>
-                <ListItem button  className={classes.nested} >
+                <ListItem button  className={classes.nested} onClick={()=>adminOut()}  >
                     <ListItemIcon><EditIcon className={classes.colorWhite} /></ListItemIcon>
-                    <ListItemText primary={"Edit Profile"}></ListItemText>
-                </ListItem>
-                <ListItem button  className={classes.nested} >
-                    <ListItemIcon><SettingsIcon className={classes.colorWhite} /></ListItemIcon>
-                    <ListItemText primary={"Setting"}></ListItemText>
+                    <ListItemText primary={"Log out"}   />
                 </ListItem>
             </List>
           </Collapse>
@@ -96,20 +109,63 @@ export default function SideMenuComp() {
             </ListItem>
           <Collapse component="li" in={ManagerUser} timeout="auto" unmountOnExit >
             <List disablePadding>
-            <NavLink smooth to="/dash-board/user-manager" className={classes.navLink} exact style={{textDecoration:"none"}}>
+            <NavLink smooth to="/add-user" className={classes.navLink}  style={{textDecoration:"none"}}>
+              <ListItem button  className={classes.nested} >
+                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemText primary={"Add User"}></ListItemText>
+                </ListItem>
+                </NavLink>
+                <NavLink smooth to="/list-user" className={classes.navLink}  style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Users"}></ListItemText>
                 </ListItem>
                 </NavLink>
-                {/* <ListItem button  className={classes.nested} >
-                    <ListItemIcon><InboxIcon className={classes.colorWhite} /></ListItemIcon>
-                    <ListItemText primary={"Edit Profile"}></ListItemText>
+            </List>
+          </Collapse>
+        </List>
+        <Divider/>
+        <List>
+        <ListItem className={classes.hover} button onClick={() => handleQLPhim()}>
+        <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
+              {/* <ListItemText primary={text} /> */}
+              <ListItemText primary={"Movie Manager"} />
+              { QLFilm != null ? QLFilm ? <ExpandLess /> : <ExpandMore /> : null}
+            </ListItem>
+          <Collapse component="li" in={QLFilm} timeout="auto" unmountOnExit >
+            <List disablePadding>
+            <NavLink smooth to="/add-movie" className={classes.navLink} exact style={{textDecoration:"none"}}>
+              <ListItem button  className={classes.nested} >
+                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemText primary={"Add Movie"}></ListItemText>
                 </ListItem>
-                <ListItem button  className={classes.nested} >
-                    <ListItemIcon><InboxIcon className={classes.colorWhite} /></ListItemIcon>
-                    <ListItemText primary={"Setting"}></ListItemText>
-                </ListItem> */}
+                </NavLink>
+                <NavLink smooth to="/list-movie" className={classes.navLink} exact style={{textDecoration:"none"}}>
+              <ListItem button  className={classes.nested} >
+                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemText primary={"List Movies"}></ListItemText>
+                </ListItem>
+                </NavLink>
+            </List>
+          </Collapse>
+        </List>
+        <Divider/>
+        <List>
+        <ListItem className={classes.hover} button onClick={() => handleQLVe()}>
+        <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
+              {/* <ListItemText primary={text} /> */}
+              <ListItemText primary={"Ticket Manager"} />
+              { QLVe != null ? QLVe ? <ExpandLess /> : <ExpandMore /> : null}
+            </ListItem>
+          <Collapse component="li" in={QLVe} timeout="auto" unmountOnExit >
+            <List disablePadding>
+            <NavLink smooth to="/add-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
+              <ListItem button  className={classes.nested} >
+                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemText primary={"List Ticket"}></ListItemText>
+                </ListItem>
+                </NavLink>
+               
             </List>
           </Collapse>
         </List>

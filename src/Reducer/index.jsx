@@ -13,7 +13,11 @@ import adminLogin from "./adminLogin";
 import listUser from "./listUser"
 import deleteUser from "./deleteUser"
 import updateUser from "./updateUser"
-
+import addUser from "./addUser"
+import listMoviePage from './listMovieOnPage'
+import deleteMovie from './deleteMovie'
+import updateMovie from './updateMovie'
+import addMovie from './addMovie'
 const rootReducer = combineReducers({
   listMovie,
   showTimesMovie,
@@ -29,6 +33,11 @@ const rootReducer = combineReducers({
   listUser,
   deleteUser,
   updateUser,
+  addUser,
+  listMoviePage,
+  deleteMovie,
+  updateMovie,
+  addMovie,
 });
 
 export default rootReducer;

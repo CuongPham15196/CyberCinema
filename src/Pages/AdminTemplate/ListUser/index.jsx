@@ -12,6 +12,8 @@ import { Button, makeStyles, Typography } from "@material-ui/core";
 import { listUserApi } from "Reducer/listUser";
 import Loading from "Components/Loading";
 import { deleteUserApi } from "Reducer/deleteUser";
+import UpdateUserModal from "Components/UpdateUserModal"
+import $ from "jquery"
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -42,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function UserManager() {
+
+function ListUser(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [editUser,onEdit] = useState({
@@ -56,15 +59,26 @@ function UserManager() {
   const listUser = useSelector((state) => state.listUser.data);
   const listUserLoading = useSelector((state) => state.listUser.loading);
  
-
-  const handleEditUser=(userEdit) =>{
+  const handleEditUser=(user)=>{
+      const {taiKhoan,hoTen,maLoaiNguoiDung,matKhau,soDt,email} = user
+      onEdit({
+          email,
+          hoTen,
+          maLoaiNguoiDung,
+          matKhau,
+          soDt,
+          taiKhoan,
+      })
       
   }
-  const handleDeleteUser=(userDelete) =>{
-    console.log(userDelete)
-      dispatch(deleteUserApi(userDelete))
-      renderListUser()
-
+ const renderModalUpdate =() =>{
+    return <UpdateUserModal key={editUser.taiKhoan} userUpdate={editUser}/>;
+ }
+ 
+  const handleDeleteUser= async (userDelete) =>{
+    await  dispatch(deleteUserApi(userDelete))
+    await dispatch(listUserApi())
+      
   }
   const renderListUser = () =>{
     return listUser?.map((user, index) => (
@@ -76,7 +90,7 @@ function UserManager() {
         <TableCell className={classes.tablePadding} align="center">{user.matKhau}</TableCell>
         <TableCell className={classes.tablePadding} align="center">{user.maLoaiNguoiDung}</TableCell>
         <TableCell className={classes.tablePadding} style={{display:"flex"}}>
-          <Button variant="contained" className={classes.btnEdit} onClick={()=>handleEditUser(user)}>
+          <Button variant="contained" className={classes.btnEdit} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick={()=>handleEditUser(user)} >
             Edit
           </Button>
           <Button variant="contained" className={classes.btnDel} onClick ={()=>handleDeleteUser(user.taiKhoan)}>
@@ -86,9 +100,12 @@ function UserManager() {
       </TableRow>
     ))
   }
+  
   useEffect(() => {
     dispatch(listUserApi());
+    
   }, []);
+  
   if (listUserLoading) return <Loading />;
   return (
     <div>
@@ -114,8 +131,10 @@ function UserManager() {
           </TableBody>
         </Table>
       </TableContainer>
+      {renderModalUpdate()}
     </div>
   );
 }
 
-export default UserManager;
+export default ListUser;
+

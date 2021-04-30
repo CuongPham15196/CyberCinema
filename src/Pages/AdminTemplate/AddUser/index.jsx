@@ -12,20 +12,19 @@ import { useStyles } from "./style";
 import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { userService } from "Services";
+import { addUserApi } from "Reducer/addUser";
+import { adminService } from "Services";
 import { Backdrop, CircularProgress, Dialog } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { updateUserApi } from "Reducer/updateUser";
-import updateUser from "Reducer/updateUser";
-
-export default function UpdateUser(props) {
+import {addUserReset} from 'Reducer/addUser'
+export default function AddUser(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { history } = props;
   const [open, setOpen] = useState(false);
-  const err = useSelector((state) => state.updateUser.err);
-  const loading = useSelector((state) => state.updateUser.loading);
-  const userUpdate = useSelector((state) => state.updateUser.data);
+  const userAdd = useSelector((state) => state.addUser.data);
+  const err = useSelector((state) => state.addUser.err);
+  const loading = useSelector((state) => state.addUser.loading);
 
   const formik = useFormik({
     initialValues: {
@@ -34,21 +33,26 @@ export default function UpdateUser(props) {
       email: "",
       soDt: "",
       maNhom: "GP10",
-      maLoaiNguoiDung: "KhachHang",
+      maLoaiNguoiDung: "",
       hoTen: "",
     },
-    validationSchema: userService.userValidationSignUp,
-    onSubmit: (values) => {
+    validationSchema: adminService.adminValidAddUser,
+    onSubmit:async (values) => {
       setOpen(true);
-      dispatch(updateUserApi(values));
+     await dispatch(addUserApi(values));
+      history.push("/list-user");
     },
   });
+//   useEffect(() => {
+//     if (userAdd) {
+//         addUserReset()
+        
+//     }
+    
+    
+//   }, []);
 
-  useEffect(() => {
-    if (userUpdate) history.push("/user-manager");
-  }, [updateUser]);
   
-  console.log(err);
 
   const renderAlert = () => {
     if (loading)
@@ -70,7 +74,7 @@ export default function UpdateUser(props) {
         {err !== null ? (
           <Alert severity="error">{err}</Alert>
         ) : (
-          <Alert severity="success">Đăng ký thành công</Alert>
+          <Alert severity="success">Add Success</Alert>
         )}
       </Dialog>
     );
@@ -85,7 +89,7 @@ export default function UpdateUser(props) {
           <AccountBoxIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Đăng ký
+          Add User Admin
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
@@ -157,6 +161,23 @@ export default function UpdateUser(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                error={formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung ? true : false}
+                value={formik.values.maLoaiNguoiDung}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                variant="outlined"
+                required
+                fullWidth
+                id="maLoaiNguoiDung"
+                label={
+                  formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung ? formik.errors.maLoaiNguoiDung : "Ma loai nguoi dung"
+                }
+                name="maLoaiNguoiDung"
+                color="secondary"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 error={formik.errors.soDt && formik.touched.soDt ? true : false}
                 value={formik.values.soDt}
                 onChange={formik.handleChange}
@@ -180,11 +201,9 @@ export default function UpdateUser(props) {
             color="secondary"
             className={classes.submit}
           >
-            Đăng ký
+            Add User
           </Button>
-          <NavLink to="/user-manager" className={classes.signIn} variant="body2">
-            Cancel
-          </NavLink>
+        
         </form>
       </div>
       <Box mt={5} style={{ textAlign: "center" }}>
