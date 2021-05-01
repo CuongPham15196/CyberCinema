@@ -10,7 +10,14 @@ import useStyles from "./style"
 import {adminLogOut} from 'Reducer/adminLogin'
 import {useDispatch} from 'react-redux'
 import { useHistory } from "react-router";
-
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import GroupIcon from '@material-ui/icons/Group';
+import MovieIcon from '@material-ui/icons/Movie';
+import AddIcon from '@material-ui/icons/Add';
+import ListIcon from '@material-ui/icons/List';
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 
@@ -89,11 +96,11 @@ export default function SideMenuComp() {
           <Collapse component="li" in={isUser} timeout="auto" unmountOnExit >
             <List disablePadding>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
+                    <ListItemIcon><SupervisorAccountIcon className={classes.colorWhite}/></ListItemIcon>
                     <ListItemText primary={"Role: Admin"}></ListItemText>
                 </ListItem>
                 <ListItem button  className={classes.nested} onClick={()=>adminOut()}  >
-                    <ListItemIcon><EditIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><ExitToAppIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"Log out"}   />
                 </ListItem>
             </List>
@@ -111,13 +118,13 @@ export default function SideMenuComp() {
             <List disablePadding>
             <NavLink smooth to="/add-user" className={classes.navLink}  style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><PersonAddIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"Add User"}></ListItemText>
                 </ListItem>
                 </NavLink>
                 <NavLink smooth to="/list-user" className={classes.navLink}  style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><GroupIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Users"}></ListItemText>
                 </ListItem>
                 </NavLink>
@@ -127,7 +134,7 @@ export default function SideMenuComp() {
         <Divider/>
         <List>
         <ListItem className={classes.hover} button onClick={() => handleQLPhim()}>
-        <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
+        <ListItemIcon><MovieIcon className={classes.colorWhite}/></ListItemIcon>
               {/* <ListItemText primary={text} /> */}
               <ListItemText primary={"Movie Manager"} />
               { QLFilm != null ? QLFilm ? <ExpandLess /> : <ExpandMore /> : null}
@@ -136,13 +143,13 @@ export default function SideMenuComp() {
             <List disablePadding>
             <NavLink smooth to="/add-movie" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><AddIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"Add Movie"}></ListItemText>
                 </ListItem>
                 </NavLink>
                 <NavLink smooth to="/list-movie" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><ListIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Movies"}></ListItemText>
                 </ListItem>
                 </NavLink>
@@ -152,7 +159,7 @@ export default function SideMenuComp() {
         <Divider/>
         <List>
         <ListItem className={classes.hover} button onClick={() => handleQLVe()}>
-        <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
+        <ListItemIcon><ConfirmationNumberIcon className={classes.colorWhite}/></ListItemIcon>
               {/* <ListItemText primary={text} /> */}
               <ListItemText primary={"Ticket Manager"} />
               { QLVe != null ? QLVe ? <ExpandLess /> : <ExpandMore /> : null}

@@ -38,12 +38,10 @@ export default function AddMovie(props) {
         danhGia:0,
     },
     onSubmit:async (values) => {
+        console.log(values.ngayKhoiChieu)
       setOpen(true);
      await dispatch(addMovieApi(values));
-     if(!err){
          history.push("/list-movie");
-     }
-     console.log(err)
 
     },
   });
@@ -198,9 +196,10 @@ export default function AddMovie(props) {
                 onBlur={formik.handleBlur}
                 variant="outlined"
                 required
-                type="date"
+                type="string"
                 fullWidth
                 id="ngayKhoiChieu"
+                format={'DD/MM/YYYY'}
                 label={
                   formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? formik.errors.ngayKhoiChieu : ""
                 }
@@ -214,7 +213,7 @@ export default function AddMovie(props) {
                 value={formik.values.danhGia}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                format={'DD/MM/YYYY'}
+                
                 variant="outlined"
                 required
                 fullWidth

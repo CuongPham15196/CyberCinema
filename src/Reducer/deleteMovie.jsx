@@ -12,7 +12,8 @@ export const deleteMovieApi = createAsyncThunk(
   "deleteMovieApi",
   async ( maPhim, { rejectWithValue }) => {
     try {
-      return await movieService.deleteMovieApi(maPhim);
+      console.log(maPhim)
+        return await movieService.deleteMoviePagesApi(maPhim);
     } catch (err) {
       return rejectWithValue(err.response.data);
     }

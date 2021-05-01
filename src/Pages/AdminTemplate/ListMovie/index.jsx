@@ -19,18 +19,20 @@ import UpdateMovieModal from "Components/UpdateMovie";
 
 
 
-function ListMoviePage(props) {
+function ListMoviePage() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [pagination,setPagination] = useState({
       soTrang:1,
       soPhanTuTrenTrang:10,
-      total:11,
+      total:2,
   })
   const [filters,setFilters] = useState({
     soTrang:1,
     soPhanTuTrenTrang:10,
   })
+  
+
   const [movieEdit,onEdit] = useState({
     maPhim  :"",
     tenPhim:"",
@@ -43,17 +45,21 @@ function ListMoviePage(props) {
     maNhom:"GP10",
     })
  
-  const listMoviePages = useSelector((state) => state.listMoviePage.data);
-  const listMoviePagesLoading = useSelector((state) => state.listMoviePage.loading);
- 
+    const listMoviePagesLoading = useSelector((state) => state.listMoviePage.loading);
+    const listMoviePages =  useSelector(state => state.listMoviePage.data);
+    const {totalPages}=useSelector(state=>state.listMoviePage)
+
+    
+
   const handleEditMovie=(movie)=>{
-      const {maPhim,tenPhim,trailer,hinhAnh,ngayKhoiChieu,moTa,biDanh,danhGia} = movie
+      let date = new Date(movie.ngayKhoiChieu)
+      const {maPhim,tenPhim,trailer,hinhAnh,moTa,biDanh,danhGia} = movie
       onEdit({
           maPhim,
           tenPhim,
           trailer,
           hinhAnh,
-          ngayKhoiChieu,
+          ngayKhoiChieu:date.toString(),
           moTa,
           biDanh,
           danhGia,
@@ -61,17 +67,17 @@ function ListMoviePage(props) {
       
   }
  const renderModalUpdate =() =>{
-    return <UpdateMovieModal key={movieEdit.maPhim} movieUpdate={movieEdit} filters={filters}/>;
+    return <UpdateMovieModal key={movieEdit.maPhim} movieUpdate={movieEdit} filters={filters} />;
  }
  
-  const handleDeleteMovie= async (userDelete) =>{
-    await  dispatch(deleteMovieApi(userDelete))
+ async function handleDeleteMovie(movie){
+    await  dispatch(deleteMovieApi(movie))
     await dispatch(listMovieOnPagesApi({
       soTrang:filters.soTrang,
       soPhanTuTrenTrang:filters.soPhanTuTrenTrang
     }))
   }
-const handlePageChange=(newPage)=>{
+function handlePageChange(newPage){
     setFilters({
         ...filters,
         soTrang:newPage,
@@ -103,11 +109,18 @@ const handlePageChange=(newPage)=>{
   }
   
   useEffect(() => {
-    dispatch(listMovieOnPagesApi({
-        soTrang:filters.soTrang,
-        soPhanTuTrenTrang:filters.soPhanTuTrenTrang,
-    })) 
-  }, [filters]);
+    async function fetchNewPage(){
+        await dispatch(listMovieOnPagesApi({
+              soTrang:filters.soTrang,
+              soPhanTuTrenTrang:filters.soPhanTuTrenTrang,
+         })) 
+        setPagination({
+          soTrang:filters.soTrang,
+          total:totalPages
+        }) 
+    }
+    fetchNewPage();
+    }, [filters]);
   
   if (listMoviePagesLoading) return <Loading />;
   return (
@@ -133,7 +146,7 @@ const handlePageChange=(newPage)=>{
             {renderListMovie()}
           </TableBody>
         </Table>
-        <Pagination pagination={pagination}  onPageChange={handlePageChange}/>
+        <Pagination pagination={pagination}  onPageChange={handlePageChange} />
       </TableContainer>
       {renderModalUpdate()}
     </div>

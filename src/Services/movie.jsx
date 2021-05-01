@@ -15,9 +15,9 @@ export default class MovieService {
     });
   }
 
-  listMovieOnPagesApi(_soTrang,_soPhanTuTrenTrang){
+  listMovieOnPagesApi(soTrang,soPhanTuTrenTrang){
     return Axios({
-      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP10&soTrang=${_soTrang}&soPhanTuTrenTrang=${_soPhanTuTrenTrang}`,
+      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP10&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
       method:"GET",
     })
   }

@@ -12,6 +12,7 @@ export const updateMovieApi = createAsyncThunk(
   "updateMovieApi",
   async ( user, { rejectWithValue }) => {
     try {
+      console.log(user)
       return await movieService.updateMovieApi(user);
     } catch (err) {
       return rejectWithValue(err.response.data);

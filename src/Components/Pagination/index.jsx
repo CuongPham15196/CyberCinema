@@ -13,9 +13,9 @@ Pagination.defaultProps = {
 
 function Pagination(props){
     const {pagination,onPageChange} = props;
-    const {soTrang,soPhanTuTrenTrang,total} = pagination;
-    const totalPages = Math.ceil(total/soTrang)
+    const {soTrang,total} = pagination;
     function handlePageChange(newPage) {
+        console.log(newPage)
         if(onPageChange){
             onPageChange(newPage)
         }
@@ -23,16 +23,16 @@ function Pagination(props){
     return (
         <div>
             <Button
-            disable = {soTrang <= 1}
+            disabled ={soTrang <=1 }
             onClick={()=>handlePageChange(soTrang-1)}
             >
                 Prev
             </Button>
             <Button
-            disable = {soTrang >= totalPages}
+            disabled = {soTrang >= total}
             onClick={()=>handlePageChange(soTrang+1)}
             >
-                Prev
+                Next
             </Button>
         </div>
     );

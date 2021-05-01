@@ -109,8 +109,8 @@ function ListUser(props) {
   if (listUserLoading) return <Loading />;
   return (
     <div>
-      <NavBarAdmin routelink={"/dash-board/user-manager"} />
-      <TableContainer component={Paper}>
+      <NavBarAdmin routelink={"/list-user"} />
+      <TableContainer >
         <Typography variant="h2" className={classes.header} component="h3">
           Danh Sách Người Dùng
         </Typography>

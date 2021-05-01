@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NavBarAdmin(props) {
+  console.log(props)
   const classes = useStyles();
 
   return (

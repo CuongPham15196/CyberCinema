@@ -1,34 +1,21 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
-import {useStyles} from './styles';
 import SideMenuComp from "Components/SideBarAdmin";
 import { Redirect, Route } from "react-router-dom";
-
+import "./styleadmin.css"
 
 function AdminLayout(props) {
-  const classes = useStyles()
   return (
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      className={classes.root}
-    >
-       <Grid
-       item 
-       lg={2}
-       >
-         <SideMenuComp/>
-       </Grid>
-       <Grid
-       item 
-       lg={10}
-       >
-        {props.children}
-       </Grid>
-
-    </Grid>
+    <div className="container-fluid">
+           <div className="row">
+             <div className="col-2 noPadding">
+             <SideMenuComp/>
+             </div>
+             <div className="col-10 noPadding">
+             {props.children}
+             </div>
+           </div>
+    </div>
+    
   )
 
 }

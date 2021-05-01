@@ -5,6 +5,8 @@ const initialState = {
   loading: false,
   data: null,
   err: null,
+  currentPage:0,
+  totalPages:2,
 };
 
 export const listMovieOnPagesApi = createAsyncThunk(
@@ -29,6 +31,8 @@ const listMoviePage = createSlice({
     [listMovieOnPagesApi.fulfilled]: (state, action) => {
       state.loading = false;
       state.data = action.payload.data.items;
+      state.currentPage=action.payload.data.currentPages;
+      state.totalPages=action.payload.data.totalPages;
       state.err = null;
     },
     [listMovieOnPagesApi.rejected]: (state, action) => {

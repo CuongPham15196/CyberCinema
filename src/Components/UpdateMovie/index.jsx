@@ -11,12 +11,12 @@ import Container from "@material-ui/core/Container";
 import { useStyles } from "Pages/AdminTemplate/ListUser/style";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Backdrop, CircularProgress, Dialog, TextareaAutosize } from "@material-ui/core";
+import { Backdrop, CircularProgress, Dialog } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import $ from 'jquery'
 import { listMovieOnPagesApi } from "Reducer/listMovieOnPage";
-import { movieService } from "Services";
 import { updateMovieApi } from "Reducer/updateMovie";
+import { movieService } from "Services";
 export default function UpdateMovieModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -24,8 +24,7 @@ export default function UpdateMovieModal(props) {
   const err = useSelector((state) => state.updateMovie.err);
   const loading = useSelector((state) => state.updateMovie.loading);
   let {movieUpdate,filters} = props
-  let date = new Date(movieUpdate.ngayKhoiChieu).toLocaleString()
-  console.log(date)
+  
   const formik = useFormik({
     initialValues: {
       maPhim: movieUpdate.maPhim,
@@ -35,28 +34,18 @@ export default function UpdateMovieModal(props) {
       biDanh: movieUpdate.biDanh,
       maNhom:"GP10",
       moTa: movieUpdate.moTa,
-      ngayKhoiChieu:date,
+      ngayKhoiChieu:movieUpdate.ngayKhoiChieu,
       danhGia:0,
     },
-    // validationSchema: movieService.movieValidationEdit,
+    validationSchema: movieService.movieValidationEdit,
     onSubmit:async  (values) => {
       setOpen(true);
-      console.log(values)
-      await dispatch(updateMovieApi(values));
+     await dispatch(updateMovieApi(values));
       
     },
   });
-  // const handleClose =() =>{
-  //   if(userUpdate){
-  //     dispatch(listUserApi())
-  //     props.renderList()
-  //   }
-  // }
-  const changeDateTime=(datetime)=>{
-         let dateValue = new Date(datetime).toLocaleString()
-         return dateValue
-  }
-  const handleOnClose=()=>{
+
+  const handleOnCloseMovie=()=>{
     setOpen(false);
     dispatch(listMovieOnPagesApi({
       soTrang:filters.soTrang,
@@ -75,7 +64,7 @@ export default function UpdateMovieModal(props) {
     return (
       <Dialog
         open={open}
-        onClose={handleOnClose}
+        onClose={handleOnCloseMovie}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -194,7 +183,7 @@ export default function UpdateMovieModal(props) {
                 id="trailer"
                 label={formik.errors.trailer && formik.touched.trailer ? formik.errors.trailer : "trailer"}
                 name="trailer"
-                type="trailer"
+                type="string"
                 color="secondary"
               />
             </Grid>
@@ -223,7 +212,8 @@ export default function UpdateMovieModal(props) {
                 onBlur={formik.handleBlur}
                 variant="outlined"
                 required
-                type="date"
+                format={'dd/MM/YYYY HH:mm:ss'}
+                type="string"
                 fullWidth
                 id="ngayKhoiChieu"
                 label={
@@ -239,7 +229,6 @@ export default function UpdateMovieModal(props) {
                 value={formik.values.danhGia}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                format={'DD/MM/YYYY'}
                 variant="outlined"
                 required
                 fullWidth
