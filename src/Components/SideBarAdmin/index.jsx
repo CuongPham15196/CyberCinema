@@ -166,13 +166,18 @@ export default function SideMenuComp() {
             </ListItem>
           <Collapse component="li" in={QLVe} timeout="auto" unmountOnExit >
             <List disablePadding>
-            <NavLink smooth to="/add-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
+            <NavLink smooth to="/list-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Ticket"}></ListItemText>
                 </ListItem>
-                </NavLink>
-               
+              </NavLink>
+              <NavLink smooth to="/add-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
+              <ListItem button  className={classes.nested} >
+                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemText primary={"Add Ticket"}></ListItemText>
+                </ListItem>
+              </NavLink>
             </List>
           </Collapse>
         </List>

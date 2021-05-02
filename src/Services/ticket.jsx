@@ -18,4 +18,21 @@ export default class TicketService {
       },
     });
   }
+  
+  createShowApi({data,accessToken}){
+    return Axios({
+      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/TaoLichChieu`,
+      method:"POST",
+      data,
+      headers:{
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+  }
+  getListTicketByShowId(maLichChieu){
+    return Axios({
+      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
+      method:"GET",
+    })
+  }
 }

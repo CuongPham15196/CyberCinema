@@ -18,6 +18,7 @@ import listMoviePage from './listMovieOnPage'
 import deleteMovie from './deleteMovie'
 import updateMovie from './updateMovie'
 import addMovie from './addMovie'
+import listTicket from './listTicket'
 const rootReducer = combineReducers({
   listMovie,
   showTimesMovie,
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   deleteMovie,
   updateMovie,
   addMovie,
+  listTicket,
 });
 
 export default rootReducer;
