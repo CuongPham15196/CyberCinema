@@ -38,6 +38,5 @@ const listMovie = createSlice({
     },
   },
 });
-
 export const {} = listMovie.actions;
 export default listMovie.reducer;

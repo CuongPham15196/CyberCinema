@@ -25,6 +25,7 @@ function NavTicket(props) {
   });
 
   useEffect(() => {
+    console.log(formik.values.movie)
     dispatch(showTimesMovieApi(formik.values.movie));
   }, [formik.values.movie]);
 

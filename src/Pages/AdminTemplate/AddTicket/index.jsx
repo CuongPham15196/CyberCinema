@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,40 +11,48 @@ import Container from "@material-ui/core/Container";
 import { useStyles } from "../AddUser/style";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Backdrop, CircularProgress, Dialog } from "@material-ui/core";
+import { Backdrop, CircularProgress, Dialog, MenuItem,NativeSelect } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { addMovieApi } from "Reducer/addMovie";
+import { movieService } from "Services";
+import { listMovieApi } from "Reducer/listMovie";
+import Loading from "Components/Loading";
+import { showTimesMovieApi } from "Reducer/showTimesMoive";
 
 
 export default function AddTicket(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { history } = props;
+  // const { history } = props;
+  // let [ listMovie ,setListMovie] = useState([])
   const [open, setOpen] = useState(false);
-  const err = useSelector((state) => state.addUser.err);
-  const loading = useSelector((state) => state.addUser.loading);
+  const err = useSelector((state) => state.listMovie.err);
+  const loading = useSelector((state) => state.listMovie.loading);
+  const listMovieReducer = useSelector((state)=>state.listMovie.data);
+  const listTheater = useSelector((state)=>state.showTimesMovie.data);
+  const loadingListTheater = useSelector((state)=>state.showTimesMovie.loading)
 
+ 
   const formik = useFormik({
     initialValues: {
-        maPhim: 0,
-        tenPhim: "",
-        trailer: "",
-        hinhAnh:"",
-        biDanh: "",
-        maNhom:"GP10",
-        moTa:"",
-        ngayKhoiChieu:"",
-        danhGia:0,
+       maPhim:"",
+       ngayChieuGioChieu:"",
+       maRap:"",
+       giaVe:"",
+      
     },
-    onSubmit:async (values) => {
-        console.log(values.ngayKhoiChieu)
-      setOpen(true);
-     await dispatch(addMovieApi(values));
-         history.push("/list-movie");
+    onSubmit: (values) => {
+      console.log(values)
+      
+    //     console.log(values.ngayKhoiChieu)
+    //   setOpen(true);
+    //  await dispatch(addMovieApi(values));
+    //      history.push("/list-movie");
 
     },
   });
 
+ 
+  
   const renderAlert = () => {
     if (loading)
       return (
@@ -70,7 +78,59 @@ export default function AddTicket(props) {
       </Dialog>
     );
   };
+  const renderListMovieId = ()=>{
+    return listMovieReducer?.map((movie,index)=>{
+      return (
+        <MenuItem key={movie.maPhim} value={movie.maPhim} >
+        {movie.tenPhim}
+      </MenuItem>
+      )
+    })
+  
+  }
+  const renderListTheater = ()=>{
+    return listTheater?.map((list)=>{
+         return list.cumRapChieu.map(cumRap=>{
+           return cumRap.lichChieuPhim.map(mLC=>{
+             return (
+              <MenuItem key={mLC.maLichChieu} value={mLC.maLichChieu} >
+                  {mLC.maLichChieu}
+              </MenuItem>
+             )
+           })
+         })
+    })
+      
+               
+      
+    
 
+      
+     
+     
+   
+  }
+  
+
+  useEffect(() => {
+    // async function  fetchMovie(){
+    //    await movieService.listMovieApi().then((res)=>{
+    //        setListMovie(res.data)
+    //   }).catch((err)=>console.log(err))
+    // }
+    // fetchMovie()
+    dispatch(listMovieApi())
+  }, [])
+  
+  useEffect(()=>{
+    console.log(formik.values.maPhim)
+      dispatch(showTimesMovieApi(formik.values.maPhim))
+  },[formik.values.maPhim])
+
+
+  if(loading) return(<Loading/>)
+
+  
   return (
         <Container component="main" maxWidth="xs">
         <CssBaseline/>
@@ -86,6 +146,7 @@ export default function AddTicket(props) {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                select
                 error={formik.errors.maPhim && formik.touched.maPhim ? true : false}
                 value={formik.values.maPhim}
                 onChange={formik.handleChange}
@@ -96,133 +157,64 @@ export default function AddTicket(props) {
                 id="maPhim"
                 label={formik.errors.maPhim && formik.touched.maPhim ? formik.errors.maPhim : "Mã phim"}
                 color="secondary"
-              />
+              >
+                {renderListMovieId()}
+              </TextField>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                error={formik.errors.tenPhim && formik.touched.tenPhim ? true : false}
-                value={formik.values.tenPhim}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                name="tenPhim"
-                variant="outlined"
-                fullWidth
-                id="tenPhim"
-                label={
-                  formik.errors.tenPhim && formik.touched.tenPhim
-                    ? formik.errors.tenPhim
-                    : "Tên Phim"
-                }
-                color="secondary"
-              />
-            </Grid>
-            
-            <Grid item xs={12}>
-              <TextField
-                error={formik.errors.biDanh && formik.touched.biDanh ? true : false}
-                value={formik.values.biDanh}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                variant="outlined"
-                fullWidth
-                name="biDanh"
-                label={
-                  formik.errors.biDanh && formik.touched.biDanh
-                    ? formik.errors.biDanh
-                    : "Bí danh"
-                }
-                id="biDanh"
-                color="secondary"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={formik.errors.moTa && formik.touched.moTa ? true : false}
-                value={formik.values.moTa}
+                select
+                error={formik.errors.maRap && formik.touched.maRap ? true : false}
+                value={formik.values.maRap}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 variant="outlined"
                 required
                 fullWidth
-                multiline
-                rows={6}
-                rowsMax={6}
-                id="moTa"
+                id="maRap"
                 label={
-                  formik.errors.moTa && formik.touched.moTa ? formik.errors.moTa : "mô Tả"
+                  formik.errors.maRap && formik.touched.maRap ? formik.errors.maRap : "Mã rạp"
                 }
-                name="moTa"
+                name="maRap"
                 color="secondary"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={formik.errors.trailer && formik.touched.trailer ? true : false}
-                value={formik.values.trailer}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                variant="outlined"
-                fullWidth
-                id="trailer"
-                label={formik.errors.trailer && formik.touched.trailer ? formik.errors.trailer : "trailer"}
-                name="trailer"
-                type="trailer"
-                color="secondary"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                error={formik.errors.hinhAnh && formik.touched.hinhAnh ? true : false}
-                value={formik.values.hinhAnh}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                variant="outlined"
-                required
-                fullWidth
-                id="hinhAnh"
-                label={
-                  formik.errors.hinhAnh && formik.touched.hinhAnh ? formik.errors.hinhAnh : "Hình Ảnh"
-                }
-                name="hinhAnh"
-                color="secondary"
-              />
+              >
+                {renderListTheater}
+              </TextField>
             </Grid>
             <Grid item xs={12} >
               <TextField
-                error={formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? true : false}
-                value={formik.values.ngayKhoiChieu}
+                error={formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu ? true : false}
+                value={formik.values.ngayChieuGioChieu}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 variant="outlined"
                 required
                 type="string"
                 fullWidth
-                id="ngayKhoiChieu"
+                id="ngayChieuGioChieu"
                 format={'DD/MM/YYYY'}
                 label={
-                  formik.errors.ngayKhoiChieu && formik.touched.ngayKhoiChieu ? formik.errors.ngayKhoiChieu : ""
+                  formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu ? formik.errors.ngayChieuGioChieu : ""
                 }
-                name="ngayKhoiChieu"
+                name="ngayChieuGioChieu"
                 color="secondary"
               />
             </Grid>
             <Grid item xs={12} >
               <TextField
-                error={formik.errors.danhGia && formik.touched.danhGia ? true : false}
-                value={formik.values.danhGia}
+                error={formik.errors.giaVe && formik.touched.giaVe ? true : false}
+                value={formik.values.giaVe}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                
                 variant="outlined"
                 required
                 fullWidth
-                id="danhGia"
+                id="giaVe"
                 label={
-                  formik.errors.danhGia && formik.touched.danhGia ? formik.errors.danhGia : "Đánh giá"
+                  formik.errors.giaVe && formik.touched.giaVe ? formik.errors.giaVe : "Giá Vé"
                 }
-                name="danhGia"
+                name="giaVe"
                 color="secondary"
-                disabled
               />
             </Grid>
             

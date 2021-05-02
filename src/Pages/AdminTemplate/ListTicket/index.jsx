@@ -50,7 +50,7 @@ function ListTicket() {
   return (
     <div>
       <NavBarAdmin routelink={"/dash-board/user-manager"} />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={classes.root}>
         <form onSubmit={handleSubmit}>
           <FormControl>
             <InputLabel htmlFor="my-input">Email address</InputLabel>

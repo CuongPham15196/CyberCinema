@@ -2,6 +2,9 @@ import {makeStyles} from '@material-ui/core'
 
 
 export const useStyles = makeStyles((theme) => ({
+    root:{
+       padding:"20px"
+    },
     table: {
       maxWidth: "500px",
       margin: "auto",
