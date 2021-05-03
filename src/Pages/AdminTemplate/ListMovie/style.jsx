@@ -12,12 +12,13 @@ export const useStyles = makeStyles((theme) => ({
       overflowX:"scroll"
     },
     tableheight:{
-      minHeight:"85px"
+      minHeight:"85px",
+      
     },
   
     header: {
       textAlign: "center",
-      paddingTop:theme.spacing(3)
+      paddingTop:theme.spacing(0)
     },
     btnEdit:{
       backgroundColor:"#81b214",
@@ -32,6 +33,16 @@ export const useStyles = makeStyles((theme) => ({
           backgroundColor:"#ce1212",
           color:"#fff"
       }
+    },
+    hideOnMobile:{
+      [theme.breakpoints.down('sm')]: {
+        display:"none"
+      },
+    },
+    hideTablet:{
+      [theme.breakpoints.down('lg')]: {
+        display:"none"
+      },
     }
   }));
   

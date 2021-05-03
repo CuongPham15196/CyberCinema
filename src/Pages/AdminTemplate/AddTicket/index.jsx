@@ -44,7 +44,7 @@ export default function AddTicket(props) {
     onSubmit: async (values) => {
       const valuesPost = {
         maPhim:values.maPhim,
-        ngayChieuGioChieu:values.ngayChieuGioChieu,
+        ngayChieuGioChieu:"",
         maRap:values.maRap,
         giaVe:values.giaVe
       }
@@ -162,7 +162,7 @@ export default function AddTicket(props) {
         <Avatar className={classes.avatar}>
           <AccountBoxIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h3">
           Create Show
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>

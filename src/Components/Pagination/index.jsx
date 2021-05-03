@@ -21,16 +21,18 @@ function Pagination(props){
         }
     }
     return (
-        <div>
+        <div className="d-flex justify-content-center m-1">
             <Button
             disabled ={soTrang <=1 }
             onClick={()=>handlePageChange(soTrang-1)}
+            color="secondary"
             >
                 Prev
             </Button>
             <Button
             disabled = {soTrang >= total}
             onClick={()=>handlePageChange(soTrang+1)}
+            color="secondary"
             >
                 Next
             </Button>

@@ -26,7 +26,7 @@ export default function AddMovie(props) {
 
   const formik = useFormik({
     initialValues: {
-        maPhim: 0,
+        maPhim: "",
         tenPhim: "",
         trailer: "",
         hinhAnh:"",

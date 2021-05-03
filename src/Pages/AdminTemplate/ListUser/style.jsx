@@ -37,4 +37,9 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
   },
+  hideOnMobile:{
+    [theme.breakpoints.down('md')]: {
+      display:"none"
+    },
+  }
 }));

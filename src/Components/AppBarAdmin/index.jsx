@@ -124,7 +124,7 @@ export default function AppBarAdmin() {
             <MenuIcon />
           </IconButton>
           <NavLink className={classes.navLink} to="/dash-board" noWrap>
-             Dashboard CyberCinema
+              CyberCinema
           </NavLink>
         </Toolbar>
       </AppBar>

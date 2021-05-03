@@ -43,6 +43,16 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor:"#ce1212",
         color:"#fff"
     }
+  },
+  hideOnMobile:{
+    [theme.breakpoints.down('sm')]: {
+      display:"none"
+    },
+  },
+  hideTablet:{
+    [theme.breakpoints.down('lg')]: {
+      display:"none"
+    },
   }
 }));
 
@@ -85,12 +95,12 @@ function ListUser(props) {
   const renderListUser = () =>{
     return listUser?.map((user, index) => (
       <TableRow className={classes.heightrow} key={index}>
-        <TableCell  align="center">{user.hoTen}</TableCell>
+        <TableCell className={classes.hideOnMobile} align="center">{user.hoTen}</TableCell>
         <TableCell  align="center">{user.taiKhoan}</TableCell>
-        <TableCell  align="center">{user.soDt}</TableCell>
-        <TableCell  align="center">{user.email}</TableCell>
-        <TableCell  align="center">{user.matKhau}</TableCell>
-        <TableCell  align="center">{user.maLoaiNguoiDung}</TableCell>
+        <TableCell className={classes.hideTablet}  align="center">{user.soDt}</TableCell>
+        <TableCell className={classes.hideTablet} align="center">{user.email}</TableCell>
+        <TableCell className={classes.hideTablet} align="center">{user.matKhau}</TableCell>
+        <TableCell className={classes.hideOnMobile} align="center">{user.maLoaiNguoiDung}</TableCell>
         <TableCell  align="center">
           <Button variant="contained"  className={classes.btnEdit} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick={()=>handleEditUser(user)} >
             EDIT
@@ -120,12 +130,12 @@ function ListUser(props) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell  align="center">Họ Tên</TableCell>
+              <TableCell className={classes.hideOnMobile} align="center">Họ Tên</TableCell>
               <TableCell  align="center">Tài Khoản</TableCell>
-              <TableCell  align="center">Số điện thoại</TableCell>
-              <TableCell  align="center">Email</TableCell>
-              <TableCell  align="center">Mật khẩu</TableCell>
-              <TableCell  align="center">Mã Loại người dùng</TableCell>
+              <TableCell className={classes.hideTablet}  align="center">Số điện thoại</TableCell>
+              <TableCell className={classes.hideTablet} align="center">Email</TableCell>
+              <TableCell className={classes.hideTablet} align="center">Mật khẩu</TableCell>
+              <TableCell className={classes.hideOnMobile} align="center">Mã Loại người dùng</TableCell>
               <TableCell ></TableCell>
               <TableCell ></TableCell>
             </TableRow>

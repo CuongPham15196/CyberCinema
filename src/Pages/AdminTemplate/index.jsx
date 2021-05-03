@@ -2,7 +2,7 @@ import React from "react";
 import SideMenuComp from "Components/SideBarAdmin";
 import { Redirect, Route } from "react-router-dom";
 import "./styleadmin.css"
-import NavBarAdmin from "Components/NavBarAdmin";
+
 import AppBarAdmin from "Components/AppBarAdmin";
 
 function AdminLayout(props) {
@@ -19,8 +19,6 @@ function AdminLayout(props) {
           <AppBarAdmin/>
           {props.children}
      </div>
-    
-    
   )
 
 }
