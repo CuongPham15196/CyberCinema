@@ -49,7 +49,7 @@ function ListTicket() {
 //   if () return <Loading />;
   return (
     <div>
-      <NavBarAdmin routelink={"/dash-board/user-manager"} />
+      {/* <NavBarAdmin routelink={"/dash-board/user-manager"} /> */}
       <TableContainer component={Paper} className={classes.root}>
         <form onSubmit={handleSubmit}>
           <FormControl>

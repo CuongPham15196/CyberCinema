@@ -5,14 +5,19 @@ export const useStyles = makeStyles((theme) => ({
     table: {
       maxWidth: "500px",
       margin: "auto",
-      padding:theme.spacing(5)
+      padding:theme.spacing(5),
+      
     },
-    tablePadding:{
-      padding:"12px",
+    tableresp:{
+      overflowX:"scroll"
+    },
+    tableheight:{
+      minHeight:"85px"
     },
   
     header: {
       textAlign: "center",
+      paddingTop:theme.spacing(3)
     },
     btnEdit:{
       backgroundColor:"#81b214",

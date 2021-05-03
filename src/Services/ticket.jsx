@@ -19,7 +19,11 @@ export default class TicketService {
     });
   }
   
-  createShowApi({data,accessToken}){
+  createShowApi(data){
+    let accessToken = "";
+    if (localStorage.getItem("UserAdmin")) {
+      accessToken = JSON.parse(localStorage.getItem("UserAdmin")).accessToken;
+    }
     return Axios({
       url:`https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/TaoLichChieu`,
       method:"POST",

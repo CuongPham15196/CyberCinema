@@ -1,23 +1,26 @@
-import React, { useEffect } from "react";
-import {useDispatch,useSelector} from 'react-redux'
-import {listMovieApi} from "Reducer/listMovie"
-import Loading from "Components/Loading";
-// import HeaderComp from "./HeaderComp/HeaderComp";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
+import CardDashBoard from 'Components/CardItem'
 
+const useStyles = makeStyles({
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 70,
+  },
+});
 
+export default function DashBoard() {
+  const classes = useStyles();
 
-
-function DashBoard(props) {
-  const dispatch = useDispatch()
-  const loadingListMovies = useSelector(state => state.listMovie.loading)
-  useEffect(() => {
-    
-    dispatch(listMovieApi())
-  }, [])
-  if( loadingListMovies) return <Loading/>
   return (
-   <div>DashBoard</div>
+    <Grid container spacing={3}>
+      <Grid item xs={3}>
+          <CardDashBoard/>
+      </Grid>
+    </Grid>
   );
 }
 
-export default DashBoard;

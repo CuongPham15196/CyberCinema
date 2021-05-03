@@ -84,11 +84,11 @@ const routerAdmin = [
     component: ListMoviePage,
     exact: false,
   },
-  {
-    path:"/list-ticket",
-    component:ListTicket,
-    exact:false,
-  }
+  // {
+  //   path:"/list-ticket",
+  //   component:ListTicket,
+  //   exact:false,
+  // }
   
 ];
 

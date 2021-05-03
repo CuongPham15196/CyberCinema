@@ -51,6 +51,7 @@ export default class AdminService {
         "Số điện thoại không hợp lệ"
       )
       .required("Không được để trống"),
+    maLoaiNguoiDung:Yup.string().required("Không được để trống"),
     hoTen: Yup.string()
       .min(4, "Không được nhập ít hơn 4 ký tự")
       .max(20, "Không được nhập nhiều hơn 20 ký tự")

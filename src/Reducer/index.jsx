@@ -19,6 +19,7 @@ import deleteMovie from './deleteMovie'
 import updateMovie from './updateMovie'
 import addMovie from './addMovie'
 import listTicket from './listTicket'
+import createShow from './createNewShow'
 const rootReducer = combineReducers({
   listMovie,
   showTimesMovie,
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   updateMovie,
   addMovie,
   listTicket,
+  createShow,
 });
 
 export default rootReducer;

@@ -11,24 +11,27 @@ import Container from "@material-ui/core/Container";
 import { useStyles } from "../AddUser/style";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Backdrop, CircularProgress, Dialog, MenuItem, NativeSelect } from "@material-ui/core";
+import { Backdrop, CircularProgress, Dialog, MenuItem } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { movieService } from "Services";
 import { listMovieApi } from "Reducer/listMovie";
 import Loading from "Components/Loading";
+import { createShowApi } from "Reducer/createNewShow";
+import { listCinemaApi } from "Reducer/listCinema";
+import { listInformationCinemaApi } from "Reducer/listInformationCinema";
 import { showTimesMovieApi } from "Reducer/showTimesMoive";
 
 export default function AddTicket(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const { history } = props;
+
   // let [ listMovie ,setListMovie] = useState([])
   const [open, setOpen] = useState(false);
   const err = useSelector((state) => state.listMovie.err);
   const loading = useSelector((state) => state.listMovie.loading);
-  const listMovieReducer = useSelector((state) => state.listMovie.data);
-  const listTheater = useSelector((state) => state.showTimesMovie.data);
-  const loadingListTheater = useSelector((state) => state.showTimesMovie.loading);
+  const listMovie = useSelector((state) => state.listMovie.data);
+  const listCinema = useSelector((state) => state.listCinema.data);
+  const listInformationCinema = useSelector((state) => state.listInformationCinema.data);
+  const errPost = useSelector((state) => state.createShow.err);
 
   const formik = useFormik({
     initialValues: {
@@ -37,13 +40,20 @@ export default function AddTicket(props) {
       maRap: "",
       giaVe: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
-
-      //     console.log(values.ngayKhoiChieu)
-      //   setOpen(true);
-      // dispatch(addMovieApi(values));
-      //      history.push("/list-movie");
+    onSubmit: async (values) => {
+      const valuesPost = {
+        maPhim: values.maPhim,
+        ngayChieuGioChieu: new Date(values.ngayChieuGioChieu),
+        maRap: values.maRap,
+        giaVe: values.giaVe,
+      };
+      console.log(valuesPost);
+      await dispatch(createShowApi(valuesPost));
+      if (errPost) {
+        alert("POST THAT BAI");
+        return;
+      }
+      setOpen(true);
     },
   });
 
@@ -72,25 +82,45 @@ export default function AddTicket(props) {
       </Dialog>
     );
   };
-  const renderListMovieId = () => {
-    return listMovieReducer?.map((movie, index) => {
+  const renderListMovie = () => {
+    return listMovie?.map((movie, index) => {
       return (
-        <MenuItem key={movie.maPhim} value={movie.maPhim}>
+        <MenuItem key={index} value={movie.maPhim}>
           {movie.tenPhim}
         </MenuItem>
       );
     });
   };
+  // const renderListTheater = ()=>{
+  //   return listTheater?.heThongRapChieu.map((list)=>{
+  //        return list.cumRapChieu.map(cumRap=>{
+  //          return cumRap.lichChieuPhim.map(mLC=>{
+  //            return (
+  //             <MenuItem key={mLC.maLichChieu} value={mLC.maRap} >
+  //                 {mLC.maRap}
+  //             </MenuItem>
+  //            )
+  //          })
+  //        })
+  //   })
+  const renderListCinema = () => {
+    return listCinema?.map((heThong, index) => {
+      return (
+        <MenuItem key={index} value={heThong.maHeThongRap}>
+          {heThong.tenHeThongRap}
+        </MenuItem>
+      );
+    });
+  };
+
   const renderListTheater = () => {
-    return listTheater?.heThongRapChieu.map((list) => {
-      return list.cumRapChieu.map((cumRap) => {
-        return cumRap.lichChieuPhim.map((mLC) => {
-          return (
-            <MenuItem key={mLC.maLichChieu} value={mLC.maLichChieu}>
-              {mLC.maLichChieu}
-            </MenuItem>
-          );
-        });
+    return listInformationCinema?.map((cumRap) => {
+      return cumRap.danhSachRap.map((item, index) => {
+        return (
+          <MenuItem key={index} value={item.maRap}>
+            {item.maRap}
+          </MenuItem>
+        );
       });
     });
   };
@@ -103,7 +133,13 @@ export default function AddTicket(props) {
     // }
     // fetchMovie()
     dispatch(listMovieApi());
+    dispatch(listCinemaApi());
   }, []);
+
+  useEffect(() => {
+    console.log(formik.values.maHeThongRap);
+    dispatch(listInformationCinemaApi(formik.values.maHeThongRap));
+  }, [formik.values.maHeThongRap]);
 
   useEffect(() => {
     console.log(formik.values.maPhim);
@@ -121,7 +157,7 @@ export default function AddTicket(props) {
           <AccountBoxIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Update Movie
+          Create Show
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
@@ -141,7 +177,29 @@ export default function AddTicket(props) {
                 }
                 color="secondary"
               >
-                {renderListMovieId()}
+                {renderListMovie()}
+              </TextField>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                select
+                error={formik.errors.maHeThongRap && formik.touched.maHeThongRap ? true : false}
+                value={formik.values.maHeThongRap}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                variant="outlined"
+                required
+                fullWidth
+                id="maHeThongRap"
+                label={
+                  formik.errors.maHeThongRap && formik.touched.maHeThongRap
+                    ? formik.errors.maHeThongRap
+                    : "Chọn hệ thống rạp"
+                }
+                name="maHeThongRap"
+                color="secondary"
+              >
+                {renderListCinema()}
               </TextField>
             </Grid>
             <Grid item xs={12}>
@@ -155,7 +213,9 @@ export default function AddTicket(props) {
                 required
                 fullWidth
                 id="maRap"
-                label={formik.errors.maRap && formik.touched.maRap ? formik.errors.maRap : "Mã rạp"}
+                label={
+                  formik.errors.maRap && formik.touched.maRap ? formik.errors.maRap : "Chọn rạp"
+                }
                 name="maRap"
                 color="secondary"
               >
@@ -175,7 +235,7 @@ export default function AddTicket(props) {
                 type="string"
                 fullWidth
                 id="ngayChieuGioChieu"
-                format={"DD/MM/YYYY"}
+                format={"dd/MM/yyyy"}
                 label={
                   formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu
                     ? formik.errors.ngayChieuGioChieu
@@ -198,6 +258,7 @@ export default function AddTicket(props) {
                 label={formik.errors.giaVe && formik.touched.giaVe ? formik.errors.giaVe : "Giá Vé"}
                 name="giaVe"
                 color="secondary"
+                type="number"
               />
             </Grid>
           </Grid>
@@ -208,7 +269,7 @@ export default function AddTicket(props) {
             color="secondary"
             className={classes.submit}
           >
-            Add Movie
+            Confirm
           </Button>
         </form>
       </div>

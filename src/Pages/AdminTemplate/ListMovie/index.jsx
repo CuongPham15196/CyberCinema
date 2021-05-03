@@ -85,20 +85,22 @@ function handlePageChange(newPage){
 }
   const renderListMovie = () =>{
     return listMoviePages?.map((movie, index) => (
-      <TableRow key={index}>
-        <TableCell className={classes.tablePadding} align="center">{movie.maPhim}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{movie.tenPhim}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{movie.trailer}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{movie.hinhAnh}</TableCell>
-        {/* <TableCell  className={classes.tablePadding} align="center">{movie.moTa}</TableCell> */}
-        <TableCell className={classes.tablePadding} align="center">{movie.ngayKhoiChieu}</TableCell>
-        <TableCell className={classes.tablePadding} style={{display:"flex"}}>
+      <TableRow className={classes.tableheight} key={index}>
+        <TableCell  align="center">{movie.maPhim}</TableCell>
+        <TableCell  align="center">{movie.tenPhim}</TableCell>
+        <TableCell  align="center">{movie.trailer}</TableCell>
+        <TableCell  align="center">{movie.hinhAnh}</TableCell>
+        {/* <TableCell   align="center">{movie.moTa}</TableCell> */}
+        <TableCell  align="center">{movie.ngayKhoiChieu}</TableCell>
+        <TableCell align="center">
           <Button variant="contained" className={classes.btnEdit} type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdateMovie" 
           onClick={()=>handleEditMovie(movie)}
            >
             Edit
           </Button>
-          <Button variant="contained" className={classes.btnDel} 
+        </TableCell>
+        <TableCell  align="center">
+        <Button variant="contained" className={classes.btnDel} 
           onClick ={()=>handleDeleteMovie(movie.maPhim)}
           >
             Delete  
@@ -124,25 +126,25 @@ function handlePageChange(newPage){
   
   if (listMoviePagesLoading) return <Loading />;
   return (
-    <div>
-      <NavBarAdmin routelink={"/dash-board/user-manager"} />
-      <TableContainer component={Paper}>
+    <div className={classes.root}>
+      <TableContainer className={classes.tableresp} >
         <Typography variant="h2" className={classes.header} component="h3">
-          Danh Sách Người Dùng
+          Danh Sách Phim
         </Typography>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <TableCell className={classes.tablePadding} align="center">Mã Phim</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Tên Phim</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Trailer</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Hình Ảnh</TableCell>
-              {/* <TableCell className={classes.tablePadding} align="center">Mô Tả</TableCell> */}
-              <TableCell className={classes.tablePadding} align="center">Ngày khởi chiếu</TableCell>
-              <TableCell className={classes.tablePadding}></TableCell>
+            <TableRow className={classes.tableheight}>
+              <TableCell  align="center">Mã Phim</TableCell>
+              <TableCell  align="center">Tên Phim</TableCell>
+              <TableCell  align="center">Trailer</TableCell>
+              <TableCell  align="center">Hình Ảnh</TableCell>
+              {/* <TableCell  align="center">Mô Tả</TableCell> */}
+              <TableCell  align="center">Ngày khởi chiếu</TableCell>
+              <TableCell ></TableCell>
+              <TableCell ></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody    >
+          <TableBody  >
             {renderListMovie()}
           </TableBody>
         </Table>

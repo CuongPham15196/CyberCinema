@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NavBarAdmin from "../../../Components/NavBarAdmin";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import { Button, makeStyles, Typography } from "@material-ui/core";
 import { listUserApi } from "Reducer/listUser";
 import Loading from "Components/Loading";
 import { deleteUserApi } from "Reducer/deleteUser";
 import UpdateUserModal from "Components/UpdateUserModal"
-import $ from "jquery"
+
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    maxWidth: "500px",
+    overflowX:"auto",
     margin: "auto",
     padding:theme.spacing(5)
+    
   },
-  tablePadding:{
-    padding:"12px",
-  },
+  heightrow:{
+    minHeight:"85px !important",
 
+  },
+  body:{
+    overflowX:"scroll"
+  },
   header: {
     textAlign: "center",
   },
@@ -82,18 +84,20 @@ function ListUser(props) {
   }
   const renderListUser = () =>{
     return listUser?.map((user, index) => (
-      <TableRow key={index}>
-        <TableCell className={classes.tablePadding} align="center">{user.hoTen}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{user.taiKhoan}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{user.soDt}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{user.email}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{user.matKhau}</TableCell>
-        <TableCell className={classes.tablePadding} align="center">{user.maLoaiNguoiDung}</TableCell>
-        <TableCell className={classes.tablePadding} style={{display:"flex"}}>
-          <Button variant="contained" className={classes.btnEdit} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick={()=>handleEditUser(user)} >
-            Edit
+      <TableRow className={classes.heightrow} key={index}>
+        <TableCell  align="center">{user.hoTen}</TableCell>
+        <TableCell  align="center">{user.taiKhoan}</TableCell>
+        <TableCell  align="center">{user.soDt}</TableCell>
+        <TableCell  align="center">{user.email}</TableCell>
+        <TableCell  align="center">{user.matKhau}</TableCell>
+        <TableCell  align="center">{user.maLoaiNguoiDung}</TableCell>
+        <TableCell  align="center">
+          <Button variant="contained"  className={classes.btnEdit} type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onClick={()=>handleEditUser(user)} >
+            EDIT
           </Button>
-          <Button variant="contained" className={classes.btnDel} onClick ={()=>handleDeleteUser(user.taiKhoan)}>
+        </TableCell>
+        <TableCell  align="center">
+        <Button variant="contained" className={classes.btnDel} onClick ={()=>handleDeleteUser(user.taiKhoan)}>
             Delete  
           </Button>
         </TableCell>
@@ -109,7 +113,6 @@ function ListUser(props) {
   if (listUserLoading) return <Loading />;
   return (
     <div>
-      <NavBarAdmin routelink={"/list-user"} />
       <TableContainer >
         <Typography variant="h2" className={classes.header} component="h3">
           Danh Sách Người Dùng
@@ -117,16 +120,17 @@ function ListUser(props) {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className={classes.tablePadding} align="center">Họ Tên</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Tài Khoản</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Số điện thoại</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Email</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Mật khẩu</TableCell>
-              <TableCell className={classes.tablePadding} align="center">Mã Loại người dùng</TableCell>
-              <TableCell className={classes.tablePadding}></TableCell>
+              <TableCell  align="center">Họ Tên</TableCell>
+              <TableCell  align="center">Tài Khoản</TableCell>
+              <TableCell  align="center">Số điện thoại</TableCell>
+              <TableCell  align="center">Email</TableCell>
+              <TableCell  align="center">Mật khẩu</TableCell>
+              <TableCell  align="center">Mã Loại người dùng</TableCell>
+              <TableCell ></TableCell>
+              <TableCell ></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody    >
+          <TableBody className={classes.body}   >
             {renderListUser()}
           </TableBody>
         </Table>
