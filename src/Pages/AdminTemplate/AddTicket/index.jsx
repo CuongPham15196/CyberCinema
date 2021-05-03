@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 import { useStyles } from "../AddUser/style";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Backdrop, CircularProgress, Dialog, MenuItem,NativeSelect } from "@material-ui/core";
+import { Backdrop, CircularProgress, Dialog, MenuItem } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { listMovieApi } from "Reducer/listMovie";
 import Loading from "Components/Loading";
@@ -30,8 +30,9 @@ export default function AddTicket(props) {
   const loading = useSelector((state) => state.listMovie.loading);
   const listMovie = useSelector((state)=>state.listMovie.data);
   const listCinema = useSelector((state)=>state.listCinema.data);
-  const listInformationCinema = useSelector((state)=>state.listInformationCinema.data)
-
+  const listInformationCinema = useSelector((state)=>state.listInformationCinema.data);
+  const errPost = useSelector(state=>state.createShow.err)
+  
  
   const formik = useFormik({
     initialValues: {
@@ -41,9 +42,21 @@ export default function AddTicket(props) {
        giaVe:"",
       
     },
-    onSubmit: (values) => {
-      setOpen(true);
-      dispatch(createShowApi(values));  
+    onSubmit: async (values) => {
+      const valuesPost = {
+        maPhim:values.maPhim,
+        ngayChieuGioChieu:values.ngayChieuGioChieu,
+        maRap:values.maRap,
+        giaVe:values.giaVe
+      }
+      console.log(valuesPost)
+      await dispatch(createShowApi(valuesPost)); 
+      if(errPost){
+        alert("POST THAT BAI")
+        return
+      }
+        setOpen(true);
+      
     },
   });
 
@@ -154,7 +167,7 @@ export default function AddTicket(props) {
           <AccountBoxIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Update Movie
+          Create Show
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
@@ -226,7 +239,7 @@ export default function AddTicket(props) {
                 type="string"
                 fullWidth
                 id="ngayChieuGioChieu"
-                format={'DD/MM/YYYY'}
+                format={'dd/MM/yyyy'}
                 label={
                   formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu ? formik.errors.ngayChieuGioChieu : ""
                 }
@@ -249,6 +262,7 @@ export default function AddTicket(props) {
                 }
                 name="giaVe"
                 color="secondary"
+                type="number"
               />
             </Grid>
             
@@ -260,7 +274,7 @@ export default function AddTicket(props) {
             color="secondary"
             className={classes.submit}
           >
-            Add Movie
+            Confirm
           </Button>
         </form>
       </div>

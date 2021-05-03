@@ -10,13 +10,18 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useStyles } from "./style";
 import { NavLink } from "react-router-dom";
-import { useFormik } from "formik";
+import {  useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserApi } from "Reducer/addUser";
 import { adminService } from "Services";
-import { Backdrop, CircularProgress, Dialog } from "@material-ui/core";
+import { Backdrop, CircularProgress, Dialog, FormControlLabel, RadioGroup } from "@material-ui/core";
+import Radio from '@material-ui/core/Radio';
+
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import { Alert } from "@material-ui/lab";
 import {addUserReset} from 'Reducer/addUser'
+
 export default function AddUser(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -81,8 +86,8 @@ export default function AddUser(props) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container component="main" maxWidth="fixed">
+      {/* <CssBaseline /> */}
       {renderAlert()}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -93,7 +98,7 @@ export default function AddUser(props) {
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 error={formik.errors.hoTen && formik.touched.hoTen ? true : false}
                 value={formik.values.hoTen}
@@ -107,7 +112,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 error={formik.errors.taiKhoan && formik.touched.taiKhoan ? true : false}
                 value={formik.values.taiKhoan}
@@ -125,7 +130,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 error={formik.errors.matKhau && formik.touched.matKhau ? true : false}
                 value={formik.values.matKhau}
@@ -144,7 +149,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6} >
               <TextField
                 error={formik.errors.email && formik.touched.email ? true : false}
                 value={formik.values.email}
@@ -159,8 +164,8 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
+            <Grid item xs={6} sm={12}>
+              {/* <TextField
                 error={formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung ? true : false}
                 value={formik.values.maLoaiNguoiDung}
                 onChange={formik.handleChange}
@@ -174,9 +179,25 @@ export default function AddUser(props) {
                 }
                 name="maLoaiNguoiDung"
                 color="secondary"
-              />
+              /> */}
+      <FormLabel className="text-left" component="legend">Mã Loai Người Dùng</FormLabel>
+       <RadioGroup 
+       aria-label="maLoaiNguoiDung" 
+        error={formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung ? true : false}
+        name="maLoaiNguoiDung" 
+        id="maLoaiNguoiDung"
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        label={
+          formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung ? formik.errors.maLoaiNguoiDung : "Ma loai nguoi dung"
+        }
+        className="d-flex flex-row justify-content-around"
+       >
+        <FormControlLabel value="KhachHang" control={<Radio />} label="Khách Hàng" />
+        <FormControlLabel value="QuanTri" control={<Radio />} label="Quản Trị" />
+      </RadioGroup>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6} sm={12}>
               <TextField
                 error={formik.errors.soDt && formik.touched.soDt ? true : false}
                 value={formik.values.soDt}
@@ -206,7 +227,7 @@ export default function AddUser(props) {
         
         </form>
       </div>
-      <Box mt={5} style={{ textAlign: "center" }}>
+      <Box mt={1} style={{ textAlign: "center" }}>
         Copyright © 2021.All Rights Reserved By{" "}
         <span style={{ color: "#f1684e" }}>CyberCinema</span>
       </Box>

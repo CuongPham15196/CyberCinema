@@ -10,9 +10,9 @@ const initialState = {
 
 export const createShowApi = createAsyncThunk(
   "createShow/createShowApi",
-  async (show, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      return await ticketService.createShowApi(show);
+      return await ticketService.createShowApi(data);
     } catch (err) {
       return rejectWithValue(err.response.data);
     }

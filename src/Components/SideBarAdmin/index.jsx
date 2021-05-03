@@ -64,18 +64,19 @@ export default function SideMenuComp() {
       }
   }, [user])
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-          <div className={classes.toolbar} />
-        <List className={classes.noPaddingTop} >
+    // <div className={classes.root}>
+    //   <CssBaseline />
+    //   <Drawer
+    //     className={classes.drawer}
+    //     variant="permanent"
+    //     classes={{
+    //       paper: classes.drawerPaper,
+    //     }}
+    //     anchor="left"
+    //   >
+          // <div className={classes.toolbar} />
+          <div className={classes.sideBar}>
+        <List className={classes.noPadding} >
         <NavLink className={classes.navLink} smooth to="/dash-board" exact style={{textDecoration:"none"}}>
         <ListItem className={classes.dashboard}   button>
               <ListItemIcon><AppsIcon className={classes.colorWhite}/></ListItemIcon>
@@ -85,7 +86,7 @@ export default function SideMenuComp() {
             </NavLink>
         </List>
         <Divider/>
-        <List className={classes.noPaddingTop}>  
+        <List className={classes.noPadding}>  
             <Divider/>  
             <ListItem className={classes.hover} button onClick={() => handleIsUserMenu()}>
             <Avatar alt={user} src="/static/images/avatar/1.jpg" className={classes.avatar}/>
@@ -107,7 +108,7 @@ export default function SideMenuComp() {
           </Collapse>
         </List>
         <Divider />
-        <List>
+        <List className={classes.noPadding}>
         <ListItem className={classes.hover} button onClick={() => handleQLNDMenu()}>
         <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite}/></ListItemIcon>
               {/* <ListItemText primary={text} /> */}
@@ -115,7 +116,7 @@ export default function SideMenuComp() {
               { ManagerUser != null ? ManagerUser ? <ExpandLess /> : <ExpandMore /> : null}
             </ListItem>
           <Collapse component="li" in={ManagerUser} timeout="auto" unmountOnExit >
-            <List disablePadding>
+            <List className={classes.noPadding}>
             <NavLink smooth to="/add-user" className={classes.navLink}  style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><PersonAddIcon className={classes.colorWhite} /></ListItemIcon>
@@ -132,7 +133,7 @@ export default function SideMenuComp() {
           </Collapse>
         </List>
         <Divider/>
-        <List>
+        <List className={classes.noPadding}>
         <ListItem className={classes.hover} button onClick={() => handleQLPhim()}>
         <ListItemIcon><MovieIcon className={classes.colorWhite}/></ListItemIcon>
               {/* <ListItemText primary={text} /> */}
@@ -166,22 +167,23 @@ export default function SideMenuComp() {
             </ListItem>
           <Collapse component="li" in={QLVe} timeout="auto" unmountOnExit >
             <List disablePadding>
-            <NavLink smooth to="/list-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
+            {/* <NavLink smooth to="/list-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><ConfirmationNumberIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Ticket"}></ListItemText>
                 </ListItem>
-              </NavLink>
+              </NavLink> */}
               <NavLink smooth to="/add-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
-                    <ListItemIcon><AccessibilityNewIcon className={classes.colorWhite} /></ListItemIcon>
+                    <ListItemIcon><AddIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"Add Ticket"}></ListItemText>
                 </ListItem>
               </NavLink>
             </List>
           </Collapse>
         </List>
-      </Drawer>
-    </div>
+     </div>
+    //  {* </Drawer>
+    // </div> */}
   );
 }

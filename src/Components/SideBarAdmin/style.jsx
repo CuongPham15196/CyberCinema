@@ -6,10 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 const drawerWidth = 250;
 const urlBackground = "https://i.pinimg.com/originals/1e/f8/b3/1ef8b36271dc2199a7411b79d566e1d0.jpg"
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    textAlign:"center",
+  sideBar:{
+    
   },
+
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -53,11 +53,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor:"#00acff",
     }
   },
-  noPaddingTop:{
-      paddingTop:theme.spacing(0),
+  noPadding:{
+      padding:theme.spacing(0),
   },
   navLink: {
-    margin: "0 0.1rem",
     fontSize: "0.9rem!important",
     color: "#f1684e!important",
     transition: "all 0.5s",
