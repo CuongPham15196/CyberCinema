@@ -12,8 +12,9 @@ export const adminLoginApi = createAsyncThunk(
   async (admin, { rejectWithValue }) => {
     try {
       const dataAdmin = await adminService.adminLoginApi(admin);
-      if (dataAdmin.data.maLoaiNguoiDung === "QuanTri") return dataAdmin;
-      else return rejectWithValue("Không có quyền truy cập");
+      if (dataAdmin.data.maLoaiNguoiDung === "QuanTri") {
+        return dataAdmin;
+      } else return rejectWithValue("Không có quyền truy cập");
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -47,5 +48,5 @@ const adminLogin = createSlice({
   },
 });
 
-export const {adminLogOut} = adminLogin.actions;
+export const { adminLogOut } = adminLogin.actions;
 export default adminLogin.reducer;
