@@ -12,6 +12,7 @@ import {useHistory} from 'react-router-dom'
 const useStyles = makeStyles({
         card: {
           maxWidth: 420,
+          margin :"auto !important"
         },
         media: {
           height: 350,
