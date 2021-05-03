@@ -77,7 +77,7 @@ export default function DashBoard() {
   const renderListCard =()=>{
     return propsCard.map((item,index)=>{
       return (
-        <Grid  item ={4} md={6} >
+        <Grid  item ={4}  >
           <CardDashBoard   className="m-auto" content={item}/>    
       </Grid>
       )
@@ -88,7 +88,7 @@ export default function DashBoard() {
     <Grid  alignContent="around" container spacing={3} >
       <Grid item xs={12}  >
        <Typography variant="h6" className="text-right" gutterBottom>
-        Welcome back <span style={{fontSize:"2rem",}}>{user} !</span>  
+        Welcome back <span style={{fontSize:"2rem",}}>{user}</span>  
       </Typography>  
       </Grid>
        <Grid item xs={12}  >
