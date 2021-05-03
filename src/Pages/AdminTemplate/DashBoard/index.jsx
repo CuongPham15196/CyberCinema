@@ -19,6 +19,19 @@ export default function DashBoard() {
     <Grid container spacing={3}>
       <Grid item xs={3}>
           <CardDashBoard/>
+        
+      </Grid>
+      <Grid item xs={3}>
+          <CardDashBoard/>
+        
+      </Grid>
+      <Grid item xs={3}>
+          <CardDashBoard/>
+        
+      </Grid>
+      <Grid item xs={3}>
+          <CardDashBoard/>
+        
       </Grid>
     </Grid>
   );

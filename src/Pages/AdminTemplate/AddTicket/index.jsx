@@ -26,7 +26,6 @@ export default function AddTicket(props) {
   
   // let [ listMovie ,setListMovie] = useState([])
   const [open, setOpen] = useState(false);
-  const err = useSelector((state) => state.listMovie.err);
   const loading = useSelector((state) => state.listMovie.loading);
   const listMovie = useSelector((state)=>state.listMovie.data);
   const listCinema = useSelector((state)=>state.listCinema.data);
@@ -51,11 +50,8 @@ export default function AddTicket(props) {
       }
       console.log(valuesPost)
       await dispatch(createShowApi(valuesPost)); 
-      if(errPost){
-        alert("POST THAT BAI")
-        return
-      }
         setOpen(true);
+      
       
     },
   });
@@ -79,8 +75,8 @@ export default function AddTicket(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {err !== null ? (
-          <Alert severity="error">{err}</Alert>
+        {errPost !== null ? (
+          <Alert severity="error">{errPost}</Alert>
         ) : (
           <Alert severity="success">Add Success</Alert>
         )}
@@ -239,7 +235,7 @@ export default function AddTicket(props) {
                 type="string"
                 fullWidth
                 id="ngayChieuGioChieu"
-                format={'dd/MM/yyyy'}
+                format="dd/MM/yyyy"
                 label={
                   formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu ? formik.errors.ngayChieuGioChieu : ""
                 }
