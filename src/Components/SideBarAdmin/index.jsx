@@ -176,7 +176,7 @@ export default function SideMenuComp() {
               <NavLink smooth to="/add-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><AddIcon className={classes.colorWhite} /></ListItemIcon>
-                    <ListItemText primary={"Add Ticket"}></ListItemText>
+                    <ListItemText primary={"Create Show"}></ListItemText>
                 </ListItem>
               </NavLink>
             </List>

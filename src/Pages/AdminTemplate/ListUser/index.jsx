@@ -11,6 +11,7 @@ import { listUserApi } from "Reducer/listUser";
 import Loading from "Components/Loading";
 import { deleteUserApi } from "Reducer/deleteUser";
 import UpdateUserModal from "Components/UpdateUserModal"
+import SearchBar from "Components/SearchAdmin";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +90,6 @@ function ListUser(props) {
  
   const handleDeleteUser= async (userDelete) =>{
     await  dispatch(deleteUserApi(userDelete))
-   
     await dispatch(listUserApi())
       
   }
@@ -128,6 +128,7 @@ function ListUser(props) {
         <Typography variant="h2" className={classes.header} component="h3">
           Danh Sách Người Dùng
         </Typography>
+        <SearchBar/>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>

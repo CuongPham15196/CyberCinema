@@ -14,6 +14,7 @@ import UpdateUserModal from 'Components/UpdateUserModal';
 import { deleteUserApi } from 'Reducer/deleteUser';
 import Pagination from 'Components/Pagination';
 import { Alert } from '@material-ui/lab';
+import SearchBar from 'Components/SearchAdmin';
 
 
 
@@ -41,7 +42,7 @@ function ListUserPagination() {
     const [filters,setFilters] =useState({
         soTrang:1,
         soPhanTuTrenTrang:10,
-        total:2,
+        searchValue:"",
     })
     const listUserPage = useSelector(state => state.listUserOnPage.data)
     const loading = useSelector(state => state.listUserOnPage.loading)
@@ -128,7 +129,13 @@ function ListUserPagination() {
           </Dialog>
         );
       };
-
+    const handleSearch = (newValue)=>{
+        setFilters({
+            ...filters,
+            soTrang:1,
+            searchValue:newValue,
+        })
+    }
     useEffect(() => {
         async function fetchUserPagination(){
             await dispatch(listUserOnPageApi({
@@ -137,7 +144,7 @@ function ListUserPagination() {
             }))
             setPagination({
                 soTrang:filters.soTrang,
-                total:totalPages
+                total:totalPages,
             })
         }
         fetchUserPagination();
@@ -154,6 +161,7 @@ function ListUserPagination() {
         <Typography variant="h2" className={classes.header} component="h3">
           Danh Sách Người Dùng
         </Typography>
+        <SearchBar onSubmit={handleSearch}	/>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -171,7 +179,7 @@ function ListUserPagination() {
             {renderListUser()}
           </TableBody>
         </Table>
-        <Pagination pagination={pagination}  onPageChange={handlePageChange} className={classes.pagination}/>
+        <Pagination pagination={pagination}  onPageChange={handlePageChange}  className={classes.pagination}/>
       </TableContainer>
       {renderModalUpdate()}
     </div>
