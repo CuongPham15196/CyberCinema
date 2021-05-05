@@ -51,6 +51,13 @@ export default class UserService {
       },
     })
   }
+
+  listUserOnPageApi(soTrang,soPhanTuTrenTrang){
+    return Axios({
+      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP10&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
+      method:"GET"
+    })
+  }
   userValidationLogin = Yup.object({
     taiKhoan: Yup.string()
       .min(4, "Không được nhập ít hơn 4 ký tự")

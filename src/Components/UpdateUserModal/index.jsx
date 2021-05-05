@@ -18,6 +18,7 @@ import { listUserApi } from "Reducer/listUser";
 import {updateUserApi} from "Reducer/updateUser";
 
 import $ from 'jquery'
+import { listUserOnPageApi } from "Reducer/listUserOnPage";
 export default function UpdateUserModal(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -43,15 +44,13 @@ export default function UpdateUserModal(props) {
       
     },
   });
-  // const handleClose =() =>{
-  //   if(userUpdate){
-  //     dispatch(listUserApi())
-  //     props.renderList()
-  //   }
-  // }
+
   const handleOnClose=()=>{
     setOpen(false);
-    dispatch(listUserApi())
+    dispatch(listUserOnPageApi({
+      soTrang:props.filters.soTrang,
+      soPhanTuTrenTrang:props.filters.soPhanTuTrenTrang
+    }))
     $('#exampleModalCenter').modal('hide')
   }
   const renderAlert = () => {

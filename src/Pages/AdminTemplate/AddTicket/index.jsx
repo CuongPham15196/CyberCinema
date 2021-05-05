@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useStyles } from "../AddUser/style";
 import { useFormik } from "formik";
+import {useHistory} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { Backdrop, CircularProgress, Dialog, MenuItem } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
@@ -23,6 +24,7 @@ import {listInformationCinemaApi} from "Reducer/listInformationCinema"
 export default function AddTicket(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   
   // let [ listMovie ,setListMovie] = useState([])
   const [open, setOpen] = useState(false);
@@ -51,7 +53,7 @@ export default function AddTicket(props) {
       console.log(valuesPost)
       await dispatch(createShowApi(valuesPost)); 
         setOpen(true);
-      
+        
       
     },
   });
@@ -71,6 +73,7 @@ export default function AddTicket(props) {
         open={open}
         onClose={() => {
           setOpen(false);
+          history.push("/dash-board")
         }}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

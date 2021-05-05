@@ -89,6 +89,7 @@ function ListUser(props) {
  
   const handleDeleteUser= async (userDelete) =>{
     await  dispatch(deleteUserApi(userDelete))
+   
     await dispatch(listUserApi())
       
   }

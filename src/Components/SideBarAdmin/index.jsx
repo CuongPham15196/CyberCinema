@@ -123,7 +123,7 @@ export default function SideMenuComp() {
                     <ListItemText primary={"Add User"}></ListItemText>
                 </ListItem>
                 </NavLink>
-                <NavLink smooth to="/list-user" className={classes.navLink}  style={{textDecoration:"none"}}>
+                <NavLink smooth to="/list-user-pagination" className={classes.navLink}  style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><GroupIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Users"}></ListItemText>

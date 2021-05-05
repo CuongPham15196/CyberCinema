@@ -16,8 +16,7 @@ function AdminLayout(props) {
           //    {props.children}
           //    </div>
           //  </div> */}
-          <AppBarAdmin/>
-          {props.children}
+          <AppBarAdmin children={props.children}/>
      </div>
   )
 

@@ -7,13 +7,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { Button, Typography } from "@material-ui/core";
+import { Backdrop, Button, CircularProgress, Dialog, Typography } from "@material-ui/core";
 import { listMovieOnPagesApi } from "Reducer/listMovieOnPage";
 import Loading from "Components/Loading";
 import Pagination from "Components/Pagination";
 import { deleteMovieApi } from "Reducer/deleteMovie";
 import {useStyles} from './style'
 import UpdateMovieModal from "Components/UpdateMovie";
+import { Alert } from "@material-ui/lab";
 
 
 
@@ -21,6 +22,7 @@ import UpdateMovieModal from "Components/UpdateMovie";
 function ListMoviePage() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [open,setOpen] = useState(false);
   const [pagination,setPagination] = useState({
       soTrang:1,
       soPhanTuTrenTrang:10,
@@ -47,7 +49,8 @@ function ListMoviePage() {
     const listMoviePagesLoading = useSelector((state) => state.listMoviePage.loading);
     const listMoviePages =  useSelector(state => state.listMoviePage.data);
     const {totalPages}=useSelector(state=>state.listMoviePage)
-
+    const err = useSelector(state => state.deleteMovie.err)
+    const loading = useSelector(state =>state.deleteMovie.loading)
     
 
   const handleEditMovie=(movie)=>{
@@ -75,6 +78,7 @@ function ListMoviePage() {
 
  async function handleDeleteMovie(movie){
     await  dispatch(deleteMovieApi(movie))
+    setOpen(true)
     await dispatch(listMovieOnPagesApi({
       soTrang:filters.soTrang,
       soPhanTuTrenTrang:filters.soPhanTuTrenTrang
@@ -86,6 +90,31 @@ function handlePageChange(newPage){
         soTrang:newPage,
     })
 }
+const renderAlert = () => {
+  if (loading)
+    return (
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="secondary" />
+      </Backdrop>
+    );
+
+  return (
+    <Dialog
+      open={open}
+      onClose={() => {
+        setOpen(false);
+      }}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      {err !== null ? (
+        <Alert severity="error">{err}</Alert>
+      ) : (
+        <Alert severity="success">Delete Success</Alert>
+      )}
+    </Dialog>
+  );
+};
   const renderListMovie = () =>{
     return listMoviePages?.map((movie, index) => (
       <TableRow  className={classes.tableheight} key={index}>
@@ -130,6 +159,7 @@ function handlePageChange(newPage){
   if (listMoviePagesLoading) return <Loading />;
   return (
     <div className={classes.root}>
+      {renderAlert()}
       <TableContainer  className={classes.tableresp} >
         <Typography variant="h2" className={classes.header} component="h3">
           Danh Sách Phim

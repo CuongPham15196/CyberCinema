@@ -40,7 +40,7 @@ export default function DashBoard() {
     {
       name:"UserManager",
       title:"Show List User",
-      url:"/list-user",
+      url:"/list-user-pagination",
       imgUrl:"https://img.favpng.com/7/5/8/computer-icons-font-awesome-user-font-png-favpng-YMnbqNubA7zBmfa13MK8WdWs8.jpg",
       totalCount:30,
       backgroundCard:"#fff",
