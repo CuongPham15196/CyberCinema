@@ -52,9 +52,15 @@ export default class UserService {
     })
   }
 
-  listUserOnPageApi(soTrang,soPhanTuTrenTrang){
+  listUserOnPageApi(soTrang,soPhanTuTrenTrang,searchValue){
+    let urlApi = ""
+    if(searchValue === "") {
+       urlApi = `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP10&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`
+    } else{
+       urlApi = `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP10&tuKhoa=${searchValue}&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`
+    }
     return Axios({
-      url:`https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDungPhanTrang?MaNhom=GP10&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
+      url:urlApi,
       method:"GET"
     })
   }

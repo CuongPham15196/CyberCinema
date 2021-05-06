@@ -10,10 +10,10 @@ const initialState = {
 };
 
 export const listUserOnPageApi = createAsyncThunk(
-  "listMoviePage/listUserOnPageApi",
-  async ({soTrang,soPhanTuTrenTrang}, { rejectWithValue }) => {
+  "listUserPage/listUserOnPageApi",
+  async ({soTrang,soPhanTuTrenTrang,searchValue}, { rejectWithValue }) => {
     try {
-      return await userService.listUserOnPageApi(soTrang,soPhanTuTrenTrang);
+      return await userService.listUserOnPageApi(soTrang,soPhanTuTrenTrang,searchValue);
     } catch (err) {
       return rejectWithValue(err.response.data);
     }

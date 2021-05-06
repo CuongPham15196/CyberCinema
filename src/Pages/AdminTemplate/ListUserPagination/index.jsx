@@ -133,14 +133,15 @@ function ListUserPagination() {
         setFilters({
             ...filters,
             soTrang:1,
-            searchValue:newValue,
+            searchValue:newValue.searchValue,
         })
     }
     useEffect(() => {
         async function fetchUserPagination(){
             await dispatch(listUserOnPageApi({
                 soTrang:filters.soTrang,
-                soPhanTuTrenTrang:filters.soPhanTuTrenTrang
+                soPhanTuTrenTrang:filters.soPhanTuTrenTrang,
+                searchValue:filters.searchValue
             }))
             setPagination({
                 soTrang:filters.soTrang,
