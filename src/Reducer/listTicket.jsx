@@ -26,7 +26,8 @@ export const  listTicketApi = createAsyncThunk(
 const listTickets = createSlice({
     name:"listTickets",
     initialState,
-    reducers:{},
+    reducers:{
+    },
     extraReducers:{
         [listTicketApi.pending]: (state) =>{
             state.loading=true;
@@ -45,5 +46,5 @@ const listTickets = createSlice({
     },
 });
 
-export const {}= listTickets.actions;
+export const {} = listTickets.actions;
 export default listTickets.reducer;

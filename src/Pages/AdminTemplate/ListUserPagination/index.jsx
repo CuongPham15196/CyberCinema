@@ -59,7 +59,8 @@ function ListUserPagination() {
         setOpen(true)
        await dispatch(listUserOnPageApi({
             soTrang:filters.soTrang,
-            soPhanTuTrenTrang:filters.soPhanTuTrenTrang
+            soPhanTuTrenTrang:filters.soPhanTuTrenTrang,
+            searchValue:filters.searchValue,
         }))
           
       }

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userService } from "Services";
 import { Backdrop, CircularProgress, Dialog } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { listUserApi } from "Reducer/listUser";
+
 import {updateUserApi} from "Reducer/updateUser";
 
 import $ from 'jquery'
@@ -26,7 +26,7 @@ export default function UpdateUserModal(props) {
   const [open, setOpen] = useState(false);
   const err = useSelector((state) => state.updateUser.err);
   const loading = useSelector((state) => state.updateUser.loading);
-  let {userUpdate} = props
+  let {userUpdate,filters} = props
   const formik = useFormik({
     initialValues: {
       taiKhoan: userUpdate.taiKhoan,
@@ -45,11 +45,13 @@ export default function UpdateUserModal(props) {
     },
   });
 
-  const handleOnClose=()=>{
+  const handleOnClose= ()=>{
     setOpen(false);
-    dispatch(listUserOnPageApi({
-      soTrang:props.filters.soTrang,
-      soPhanTuTrenTrang:props.filters.soPhanTuTrenTrang
+    console.log(filters,"props")
+     dispatch(listUserOnPageApi({
+      soTrang:filters.soTrang,
+      soPhanTuTrenTrang:filters.soPhanTuTrenTrang,
+      searchValue:filters.searchValue,
     }))
     $('#exampleModalCenter').modal('hide')
   }

@@ -27,12 +27,11 @@ function ListTicket() {
   const listMovie = useSelector(state => state.listMovie.data)
   const loading = useSelector(state => state.listMovie.loading)
   const listShowTime = useSelector(state=>state.showTimesMovie.data)
-  const loadingShow = useSelector(state => state.showTimesMovie.loading)
+  // const loadingShow = useSelector(state => state.showTimesMovie.loading)
   const listTickets = useSelector(state => state.listTicket.data)
   const loadingTicket = useSelector(state =>state.listTicket.loading)
- if(!loadingTicket){
-   console.log(listTickets)
- }
+  
+ 
   const renderSelectMovie = () =>{
     return listMovie?.map((item,index)=>{
       return (
@@ -90,6 +89,7 @@ function ListTicket() {
   }
   useEffect(()=>{
      dispatch(listMovieApi())
+    
   },[])
   useEffect(()=>{
     dispatch(showTimesMovieApi(maPhim))

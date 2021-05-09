@@ -81,7 +81,8 @@ function ListMoviePage() {
     setOpen(true)
     await dispatch(listMovieOnPagesApi({
       soTrang:filters.soTrang,
-      soPhanTuTrenTrang:filters.soPhanTuTrenTrang
+      soPhanTuTrenTrang:filters.soPhanTuTrenTrang,
+     
     }))
   }
 function handlePageChange(newPage){

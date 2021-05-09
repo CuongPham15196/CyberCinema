@@ -42,7 +42,7 @@ export default function AddUser(props) {
     onSubmit:async (values) => {
       setOpen(true);
      await dispatch(addUserApi(values));
-      history.push("/list-user");
+      history.push("/list-user-pagination");
     },
   });
 //   useEffect(() => {
