@@ -212,8 +212,8 @@ export default function UpdateMovieModal(props) {
                 onBlur={formik.handleBlur}
                 variant="outlined"
                 required
-                format={'dd/MM/YYYY HH:mm:ss'}
-                type="string"
+                format={'DD/MM/YYYY HH:mm:ss'}
+                type="local-date"
                 fullWidth
                 id="ngayKhoiChieu"
                 label={

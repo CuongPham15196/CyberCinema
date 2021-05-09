@@ -67,7 +67,7 @@ export default class UserService {
   userValidationLogin = Yup.object({
     taiKhoan: Yup.string()
       .min(4, "Không được nhập ít hơn 4 ký tự")
-      .max(10, "Không được nhập nhiều hơn 10 ký tự")
+      .max(14, "Không được nhập nhiều hơn 14 ký tự")
       .required("Không được để trống"),
     matKhau: Yup.string()
       .min(6, "Không được nhập ít hơn 6 ký tự")
@@ -78,7 +78,7 @@ export default class UserService {
   userValidationSignUp = Yup.object({
     taiKhoan: Yup.string()
       .min(4, "Không được nhập ít hơn 4 ký tự")
-      .max(10, "Không được nhập nhiều hơn 10 ký tự")
+      .max(14, "Không được nhập nhiều hơn 14 ký tự")
       .required("Không được để trống"),
     matKhau: Yup.string()
       .min(6, "Không được nhập ít hơn 6 ký tự")

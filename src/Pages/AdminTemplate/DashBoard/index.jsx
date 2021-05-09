@@ -77,7 +77,7 @@ export default function DashBoard() {
   const renderListCard =()=>{
     return propsCard.map((item,index)=>{
       return (
-        <Grid  item sm={6}   >
+        <Grid  item sm={12} md={6} lg={4}   >
           <CardDashBoard   className="m-auto" content={item}/>    
       </Grid>
       )
