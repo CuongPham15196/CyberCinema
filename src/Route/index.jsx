@@ -90,12 +90,12 @@ const routerAdmin = [
     path:"/list-user-pagination",
     component:ListUserPagination,
     exact:false,
+  },
+  {
+    path:"/list-ticket",
+    component:ListTicket,
+    exact:false,
   }
-  // {
-  //   path:"/list-ticket",
-  //   component:ListTicket,
-  //   exact:false,
-  // }
   
 ];
 

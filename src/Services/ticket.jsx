@@ -33,7 +33,8 @@ export default class TicketService {
       }
     })
   }
-  getListTicketByShowId(maLichChieu){
+  listTicketApi(maLichChieu){
+    console.log(maLichChieu)
     return Axios({
       url:`https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
       method:"GET",

@@ -33,5 +33,30 @@ export const useStyles = makeStyles((theme) => ({
     },
     inputType:{
         display:"flex",
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+    widthContent:{
+      minWidth:"150px",
+    },
+    soldOut:{
+      backgroundColor:"#cdc7be",
+    },
+    hideOnMobile:{
+      [theme.breakpoints.down('sm')]: {
+        display:"none",
+      },
+      minWidth:"150px",
+    },
+    hideTablet:{
+      [theme.breakpoints.down('lg')]: {
+        display:"none",
+      },
+      minWidth:"150px",
     }
   }));
