@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -34,7 +34,8 @@ export default function PersistentDrawerRight(props) {
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const user = useSelector((state) => state.userLogin.data);
-
+  const [isChangeBg,setChangeBg] = useState(false);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -56,7 +57,22 @@ export default function PersistentDrawerRight(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const setPage =()=>{
+      if(window.pageYOffset >= 50){
+        setChangeBg(true)
+      } else {
+        setChangeBg(false)
+      }
+  }
+  useEffect(() => {
+    function watchScroll() {
+      window.addEventListener("scroll", setPage);
+    }
+    watchScroll();
+    return () => {
+      window.removeEventListener("scroll", setPage);
+    };
+  });
   return (
     <div className={classes.root}>
       <AppBar
@@ -64,6 +80,7 @@ export default function PersistentDrawerRight(props) {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
+        style={isChangeBg?{backgroundColor:"rgba(33, 33, 33, 0.882)"}:{backgroundColor:"transparent",boxShadow:"none"}}
       >
         <Toolbar>
           <NavLink smooth className={classes.title} to="/#" exact>
