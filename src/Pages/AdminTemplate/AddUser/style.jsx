@@ -18,6 +18,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    width:"50%",
     transiton: "all 0.5s",
     "&:hover": {
       backgroundColor: theme.palette.primary.main,

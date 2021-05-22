@@ -18,7 +18,7 @@ import Loading from "Components/Loading";
 import { createShowApi } from "Reducer/createNewShow";
 import { listCinemaApi } from "Reducer/listCinema";
 import { listInformationCinemaApi } from "Reducer/listInformationCinema";
-import { showTimesMovieApi } from "Reducer/showTimesMoive";
+import moment from "moment";
 
 export default function AddTicket(props) {
   const classes = useStyles();
@@ -26,7 +26,6 @@ export default function AddTicket(props) {
 
   // let [ listMovie ,setListMovie] = useState([])
   const [open, setOpen] = useState(false);
-  const err = useSelector((state) => state.listMovie.err);
   const loading = useSelector((state) => state.listMovie.loading);
   const listMovie = useSelector((state) => state.listMovie.data);
   const listCinema = useSelector((state) => state.listCinema.data);
@@ -43,16 +42,12 @@ export default function AddTicket(props) {
     onSubmit: async (values) => {
       const valuesPost = {
         maPhim: values.maPhim,
-        ngayChieuGioChieu: new Date(values.ngayChieuGioChieu),
+        ngayChieuGioChieu: "null",
         maRap: values.maRap,
         giaVe: values.giaVe,
       };
       console.log(valuesPost);
       await dispatch(createShowApi(valuesPost));
-      if (errPost) {
-        alert("POST THAT BAI");
-        return;
-      }
       setOpen(true);
     },
   });
@@ -74,8 +69,8 @@ export default function AddTicket(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {err !== null ? (
-          <Alert severity="error">{err}</Alert>
+        {errPost !== null ? (
+          <Alert severity="error">{errPost}</Alert>
         ) : (
           <Alert severity="success">Add Success</Alert>
         )}
@@ -140,11 +135,6 @@ export default function AddTicket(props) {
     console.log(formik.values.maHeThongRap);
     dispatch(listInformationCinemaApi(formik.values.maHeThongRap));
   }, [formik.values.maHeThongRap]);
-
-  useEffect(() => {
-    console.log(formik.values.maPhim);
-    dispatch(showTimesMovieApi(formik.values.maPhim));
-  }, [formik.values.maPhim]);
 
   if (loading) return <Loading />;
 
@@ -235,7 +225,7 @@ export default function AddTicket(props) {
                 type="string"
                 fullWidth
                 id="ngayChieuGioChieu"
-                format={"dd/MM/yyyy"}
+                format="dd/MM/yyyy"
                 label={
                   formik.errors.ngayChieuGioChieu && formik.touched.ngayChieuGioChieu
                     ? formik.errors.ngayChieuGioChieu

@@ -5,19 +5,15 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import SideMenuComp from 'Components/SideBarAdmin';
+import { NavLink } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 const urlBackground = "https://i.pinimg.com/originals/1e/f8/b3/1ef8b36271dc2199a7411b79d566e1d0.jpg"
@@ -66,6 +62,17 @@ const useStyles = makeStyles((theme) => ({
   buttonToggle:{
     color:"#fff"
   },
+  navLink:{
+    fontSize:"1.5rem",
+    textDecoration:"none",
+    color:"#fff",
+    "&:hover":{
+      textDecoration:"none",
+      color:"#fff"
+    }
+    
+  },
+
   content: {
     flexGrow: 1,
     padding: theme.spacing(2),
@@ -116,9 +123,9 @@ export default function AppBarAdmin() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <NavLink className={classes.navLink} to="/dash-board" noWrap>
              Dashboard CyberCinema
-          </Typography>
+          </NavLink>
         </Toolbar>
       </AppBar>
       <Drawer

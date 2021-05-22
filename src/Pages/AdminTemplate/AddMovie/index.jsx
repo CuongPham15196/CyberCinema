@@ -21,8 +21,8 @@ export default function AddMovie(props) {
   const dispatch = useDispatch();
   const { history } = props;
   const [open, setOpen] = useState(false);
-  const err = useSelector((state) => state.addUser.err);
-  const loading = useSelector((state) => state.addUser.loading);
+  const err = useSelector((state) => state.addMovie.err);
+  const loading = useSelector((state) => state.addMovie.loading);
 
   const formik = useFormik({
     initialValues: {
@@ -72,15 +72,15 @@ export default function AddMovie(props) {
   };
 
   return (
-        <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs">
         <CssBaseline/>
       {renderAlert()}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <AccountBoxIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Update Movie
+        <Typography component="h1" variant="h3">
+          Add Movie
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
@@ -238,7 +238,7 @@ export default function AddMovie(props) {
           </Button>
         </form>
       </div>
-      <Box mt={5} style={{ textAlign: "center" }}>
+      <Box mt={3} style={{ textAlign: "center" }}>
         Copyright © 2021.All Rights Reserved By{" "}
         <span style={{ color: "#f1684e" }}>CyberCinema</span>
       </Box>

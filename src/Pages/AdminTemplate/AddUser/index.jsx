@@ -9,15 +9,12 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useStyles } from "./style";
-import { NavLink } from "react-router-dom";
 import {  useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserApi } from "Reducer/addUser";
 import { adminService } from "Services";
 import { Backdrop, CircularProgress, Dialog, FormControlLabel, RadioGroup } from "@material-ui/core";
 import Radio from '@material-ui/core/Radio';
-
-import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Alert } from "@material-ui/lab";
 import {addUserReset} from 'Reducer/addUser'
@@ -91,10 +88,10 @@ export default function AddUser(props) {
       {renderAlert()}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <AccountBoxIcon />
+          <AccountBoxIcon fontSize="large"/>
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Add User Admin
+        <Typography component="h1" variant="h3">
+          Add User
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
@@ -217,7 +214,6 @@ export default function AddUser(props) {
           </Grid>
           <Button
             type="submit"
-            fullWidth
             variant="contained"
             color="secondary"
             className={classes.submit}
@@ -227,7 +223,7 @@ export default function AddUser(props) {
         
         </form>
       </div>
-      <Box mt={1} style={{ textAlign: "center" }}>
+      <Box mt={1}  style={{ textAlign: "center" }}>
         Copyright © 2021.All Rights Reserved By{" "}
         <span style={{ color: "#f1684e" }}>CyberCinema</span>
       </Box>
