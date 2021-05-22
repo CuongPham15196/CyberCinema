@@ -40,7 +40,7 @@ export default function DashBoard() {
     {
       name:"UserManager",
       title:"Show List User",
-      url:"/list-user",
+      url:"/list-user-pagination",
       imgUrl:"https://img.favpng.com/7/5/8/computer-icons-font-awesome-user-font-png-favpng-YMnbqNubA7zBmfa13MK8WdWs8.jpg",
       totalCount:30,
       backgroundCard:"#fff",
@@ -77,7 +77,7 @@ export default function DashBoard() {
   const renderListCard =()=>{
     return propsCard.map((item,index)=>{
       return (
-        <Grid  item sm={6}   >
+        <Grid  item sm={12} md={6} lg={4}   >
           <CardDashBoard   className="m-auto" content={item}/>    
       </Grid>
       )

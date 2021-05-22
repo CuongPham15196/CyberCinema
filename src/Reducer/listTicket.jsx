@@ -11,10 +11,11 @@ const initialState = {
 
 
 export const  listTicketApi = createAsyncThunk(
-    "listUser/listTicketApi",
+    "listTicket/listTicketApi",
     async (maLichChieu,{rejectWithValue}) =>{
         try{
-           return await ticketService.getListTicketByShowId(maLichChieu);
+            console.log(maLichChieu)
+           return await ticketService.listTicketApi(maLichChieu);
         } 
         catch(err){
             rejectWithValue(err.response.data);
@@ -22,18 +23,20 @@ export const  listTicketApi = createAsyncThunk(
     }
 )
 
-const listTicket = createSlice({
-    name:"listTicket",
+const listTickets = createSlice({
+    name:"listTickets",
     initialState,
-    reducers:{},
+    reducers:{
+    },
     extraReducers:{
         [listTicketApi.pending]: (state) =>{
             state.loading=true;
         },
         [listTicketApi.fulfilled]:(state,action) =>{
+            console.log(action)
             state.loading=false;
-            state.data =action.payload.data;
-            state.err=null
+            state.data = action.payload.data;
+            state.err=null;
         },
         [listTicketApi.rejected]:(state,action)=>{
             state.loading=false;
@@ -43,5 +46,5 @@ const listTicket = createSlice({
     },
 });
 
-export const {}= listTicket.actions;
-export default listTicket.reducer;
+export const {} = listTickets.actions;
+export default listTickets.reducer;

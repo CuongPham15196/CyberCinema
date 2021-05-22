@@ -123,7 +123,7 @@ export default function SideMenuComp() {
                     <ListItemText primary={"Add User"}></ListItemText>
                 </ListItem>
                 </NavLink>
-                <NavLink smooth to="/list-user" className={classes.navLink}  style={{textDecoration:"none"}}>
+                <NavLink smooth to="/list-user-pagination" className={classes.navLink}  style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><GroupIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Users"}></ListItemText>
@@ -167,16 +167,16 @@ export default function SideMenuComp() {
             </ListItem>
           <Collapse component="li" in={QLVe} timeout="auto" unmountOnExit >
             <List disablePadding>
-            {/* <NavLink smooth to="/list-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
+            <NavLink smooth to="/list-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><ConfirmationNumberIcon className={classes.colorWhite} /></ListItemIcon>
                     <ListItemText primary={"List Ticket"}></ListItemText>
                 </ListItem>
-              </NavLink> */}
+              </NavLink>
               <NavLink smooth to="/add-ticket" className={classes.navLink} exact style={{textDecoration:"none"}}>
               <ListItem button  className={classes.nested} >
                     <ListItemIcon><AddIcon className={classes.colorWhite} /></ListItemIcon>
-                    <ListItemText primary={"Add Ticket"}></ListItemText>
+                    <ListItemText primary={"Create Show"}></ListItemText>
                 </ListItem>
               </NavLink>
             </List>

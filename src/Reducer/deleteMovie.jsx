@@ -20,7 +20,7 @@ export const deleteMovieApi = createAsyncThunk(
   }
 );
 
-const deleteUser = createSlice({
+const deleteMovie = createSlice({
   name: "deleteMovie",
   initialState,
   reducers: {},
@@ -41,5 +41,5 @@ const deleteUser = createSlice({
   },
 });
 
-export const {  } = deleteUser.actions;
-export default deleteUser.reducer;
+export const {  } = deleteMovie.actions;
+export default deleteMovie.reducer;

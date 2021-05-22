@@ -13,6 +13,8 @@ import AddTicket from "Pages/AdminTemplate/AddTicket";
 import ListMoviePage from "Pages/AdminTemplate/ListMovie";
 import ListTicket from "Pages/AdminTemplate/ListTicket";
 
+import ListUserPagination from "Pages/AdminTemplate/ListUserPagination";
+
 
 const routerHome = [
   {
@@ -63,11 +65,11 @@ const routerAdmin = [
     component: AddUser,
     exact: false,
   },
-  {
-    path: "/list-user",
-    component: ListUser,
-    exact: false,
-  },
+  // {
+  //   path: "/list-user",
+  //   component: ListUser,
+  //   exact: false,
+  // },
   {
     path: "/add-movie",
     component: AddMovie,
@@ -84,11 +86,16 @@ const routerAdmin = [
     component: ListMoviePage,
     exact: false,
   },
-  // {
-  //   path:"/list-ticket",
-  //   component:ListTicket,
-  //   exact:false,
-  // }
+  {
+    path:"/list-user-pagination",
+    component:ListUserPagination,
+    exact:false,
+  },
+  {
+    path:"/list-ticket",
+    component:ListTicket,
+    exact:false,
+  }
   
 ];
 

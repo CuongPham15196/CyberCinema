@@ -42,7 +42,7 @@ export default function AddUser(props) {
     onSubmit:async (values) => {
       setOpen(true);
      await dispatch(addUserApi(values));
-      history.push("/list-user");
+      history.push("/list-user-pagination");
     },
   });
 //   useEffect(() => {
@@ -83,7 +83,7 @@ export default function AddUser(props) {
   };
 
   return (
-    <Container component="main" maxWidth="fixed">
+    <Container component="main" maxWidth="sm">
       {/* <CssBaseline /> */}
       {renderAlert()}
       <div className={classes.paper}>
@@ -95,7 +95,7 @@ export default function AddUser(props) {
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 error={formik.errors.hoTen && formik.touched.hoTen ? true : false}
                 value={formik.values.hoTen}
@@ -109,7 +109,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 error={formik.errors.taiKhoan && formik.touched.taiKhoan ? true : false}
                 value={formik.values.taiKhoan}
@@ -127,7 +127,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 error={formik.errors.matKhau && formik.touched.matKhau ? true : false}
                 value={formik.values.matKhau}
@@ -146,7 +146,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={6} >
+            <Grid item xs={12} >
               <TextField
                 error={formik.errors.email && formik.touched.email ? true : false}
                 value={formik.values.email}
@@ -161,7 +161,7 @@ export default function AddUser(props) {
                 color="secondary"
               />
             </Grid>
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} sm={12}>
               {/* <TextField
                 error={formik.errors.maLoaiNguoiDung && formik.touched.maLoaiNguoiDung ? true : false}
                 value={formik.values.maLoaiNguoiDung}
@@ -194,7 +194,7 @@ export default function AddUser(props) {
         <FormControlLabel value="QuanTri" control={<Radio />} label="Quản Trị" />
       </RadioGroup>
             </Grid>
-            <Grid item xs={6} sm={12}>
+            <Grid item xs={12} sm={12}>
               <TextField
                 error={formik.errors.soDt && formik.touched.soDt ? true : false}
                 value={formik.values.soDt}

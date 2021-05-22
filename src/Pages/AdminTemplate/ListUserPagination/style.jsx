@@ -1,19 +1,19 @@
-import {makeStyles} from '@material-ui/core'
-
+import {makeStyles} from "@material-ui/core"
 
 export const useStyles = makeStyles((theme) => ({
-    root:{
-       padding:"20px"
-    },
     table: {
-      maxWidth: "500px",
+      overflowX:"auto",
       margin: "auto",
       padding:theme.spacing(5)
+      
     },
-    tablePadding:{
-      padding:"12px",
-    },
+    heightrow:{
+      minHeight:"85px !important",
   
+    },
+    body:{
+      overflowX:"scroll"
+    },
     header: {
       textAlign: "center",
     },
@@ -24,6 +24,13 @@ export const useStyles = makeStyles((theme) => ({
           color:"#fff"
       }
     },
+    pagination:{
+        width:"100%"
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: "#fff",
+      },
     btnDel:{
       backgroundColor:"#fb3640",
       "&:hover":{
@@ -31,32 +38,14 @@ export const useStyles = makeStyles((theme) => ({
           color:"#fff"
       }
     },
-    inputType:{
-        display:"flex",
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-    widthContent:{
-      minWidth:"150px",
-    },
-    soldOut:{
-      backgroundColor:"#cdc7be",
-    },
     hideOnMobile:{
       [theme.breakpoints.down('sm')]: {
-        display:"none",
+        display:"none"
       },
-      minWidth:"150px",
     },
     hideTablet:{
       [theme.breakpoints.down('lg')]: {
-        display:"none",
+        display:"none"
       },
-      minWidth:"150px",
     }
   }));

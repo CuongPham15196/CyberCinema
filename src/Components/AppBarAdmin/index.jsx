@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppBarAdmin() {
+export default function AppBarAdmin(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -124,7 +124,7 @@ export default function AppBarAdmin() {
             <MenuIcon />
           </IconButton>
           <NavLink className={classes.navLink} to="/dash-board" noWrap>
-             Dashboard CyberCinema
+              CyberAdmin
           </NavLink>
         </Toolbar>
       </AppBar>
@@ -151,7 +151,7 @@ export default function AppBarAdmin() {
         })}
       >
         <div className={classes.drawerHeader} />
-        {/* content here */}
+        {props.children}
       </main>
     </div>
   );
